@@ -59,7 +59,9 @@ cmake --build ./build --target predictor -j $(nproc)
 
 
 OUT=results/
-POSTFIX="ae"
+POSTFIX="ae-AlwaysUD"
+POSTFIX="ae-CorrectedNT"
+POSTFIX="ae-New2-noBucket-D5clk"
 
 
 
@@ -73,13 +75,14 @@ N_SIM=$(( 500 * $d1M ))
 
 FLAGS=""
 # FLAGS="${FLAGS} --tabledump"
+FLAGS="${FLAGS} --simulate-btb"
 
 
 BRMODELS=""
+BRMODELS="${BRMODELS} llbp"
+BRMODELS="${BRMODELS} llbp-timing"
 BRMODELS="${BRMODELS} tage64kscl"
 BRMODELS="${BRMODELS} tage512kscl"
-BRMODELS="${BRMODELS} llbp"
-BRMODELS="${BRMODELS} llbp-0lat"
 
 
 commands=()
@@ -102,7 +105,7 @@ for model in $BRMODELS; do
                 ${FLAGS} \
                 -w ${N_WARM} -n ${N_SIM} \
                 --output "${OUTDIR}/${model}-${POSTFIX}" \
-                > $OUTDIR/${model}-${POSTFIX}.txt 2>&1"
+                > $OUTDIR/${model}-${POSTFIX}.txt 2>&1" &
 
         commands+=("$CMD")
 
@@ -112,4 +115,4 @@ done
 
 echo "Running ${#commands[@]} simulations"
 
-parallel --jobs $(nproc) ::: "${commands[@]}"
+# parallel --jobs $(nproc) ::: "${commands[@]}"
