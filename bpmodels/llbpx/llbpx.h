@@ -651,7 +651,7 @@ class LLBPXTSCL64k : public LLBPX {
 // The LLBP predictor with simulating the prefetch latency.
 class LLBPXTSCL64kTiming : public LLBPX {
    public:
-    LLBPXTSCL64kTiming(void)
+    explicit LLBPXTSCL64kTiming(int access_delay = 4)
         : LLBPX(LLBPXConfig
             {
                 .tsclConfig = TSCLConfig
@@ -661,6 +661,7 @@ class LLBPXTSCL64kTiming : public LLBPX {
                     .useLoop = true
                 },
                 .simulateTiming = true,
+                .accessDelay = access_delay,
             })
     {}
 };
@@ -668,7 +669,7 @@ class LLBPXTSCL64kTiming : public LLBPX {
 // The LLBP predictor with simulating the prefetch latency.
 class LLBPXTSCL64kTimingOptW : public LLBPX {
    public:
-    LLBPXTSCL64kTimingOptW(void)
+    explicit LLBPXTSCL64kTimingOptW(int access_delay = 4)
         : LLBPX(LLBPXConfig
             {
                 .tsclConfig = TSCLConfig
@@ -680,10 +681,143 @@ class LLBPXTSCL64kTimingOptW : public LLBPX {
                 // .simulateTiming = false,
                 .simulateTiming = true,
                 .optW = true,
+                .accessDelay = access_delay,
             })
     {}
 };
 
 
+
+
+// Experimental model: reduced entry counts in the base TAGE tables.
+// Statistical Corrector and loop-predictor configurations remain unchanged.
+class LLBPXTSCLReducedTage : public LLBPX {
+   public:
+    LLBPXTSCLReducedTage(void)
+        : LLBPX(LLBPXConfig
+            {
+                .tsclConfig = TSCLConfig
+                {
+                    .tageConfig = TageConfig
+                    {
+                        .LogG = 9,
+                        .LogB = 12,
+                    },
+                    .useSC = true,
+                    .useLoop = true
+                },
+                .simulateTiming = false,
+            })
+    {}
+};
+
+
+
+// Halve tagged TAGE table entries; retain the bimodal table size.
+class LLBPXTSCLReducedTagged : public LLBPX {
+public:
+    LLBPXTSCLReducedTagged()
+        : LLBPX(LLBPXConfig{
+            .tsclConfig = TSCLConfig{
+                .tageConfig = TageConfig{.LogG = 9, .LogB = 13},
+                .useSC = true,
+                .useLoop = true
+            },
+            .simulateTiming = false,
+        })
+    {}
+};
+
+// Halve the bimodal table entries; retain tagged TAGE table sizes.
+class LLBPXTSCLReducedBimodal : public LLBPX {
+public:
+    LLBPXTSCLReducedBimodal()
+        : LLBPX(LLBPXConfig{
+            .tsclConfig = TSCLConfig{
+                .tageConfig = TageConfig{.LogG = 10, .LogB = 12},
+                .useSC = true,
+                .useLoop = true
+            },
+            .simulateTiming = false,
+        })
+    {}
+};
+
+class LLBPXTSCLReducedTaggedTiming : public LLBPX {
+public:
+    explicit LLBPXTSCLReducedTaggedTiming(int access_delay)
+        : LLBPX(LLBPXConfig{
+            .tsclConfig = TSCLConfig{
+                .tageConfig = TageConfig{.LogG = 9, .LogB = 13},
+                .useSC = true,
+                .useLoop = true
+            },
+            .simulateTiming = true,
+            .accessDelay = access_delay,
+        })
+    {}
+};
+
+class LLBPXTSCLReducedBimodalTiming : public LLBPX {
+public:
+    explicit LLBPXTSCLReducedBimodalTiming(int access_delay)
+        : LLBPX(LLBPXConfig{
+            .tsclConfig = TSCLConfig{
+                .tageConfig = TageConfig{.LogG = 10, .LogB = 12},
+                .useSC = true,
+                .useLoop = true
+            },
+            .simulateTiming = true,
+            .accessDelay = access_delay,
+        })
+    {}
+};
+
+class LLBPXTSCLReducedTageTiming : public LLBPX {
+public:
+    explicit LLBPXTSCLReducedTageTiming(int access_delay)
+        : LLBPX(LLBPXConfig{
+            .tsclConfig = TSCLConfig{
+                .tageConfig = TageConfig{.LogG = 9, .LogB = 12},
+                .useSC = true,
+                .useLoop = true
+            },
+            .simulateTiming = true,
+            .accessDelay = access_delay,
+        })
+    {}
+};
+
+
+// Experimental capacity point: LogG=8 (256 entries per tagged bank).
+// Keep the bimodal, statistical-corrector, and loop configurations fixed.
+class LLBPXTSCLLogG8 : public LLBPX {
+public:
+    LLBPXTSCLLogG8()
+        : LLBPX(LLBPXConfig{
+            .tsclConfig = TSCLConfig{
+                .tageConfig = TageConfig{.LogG = 8, .LogB = 13},
+                .useSC = true,
+                .useLoop = true
+            },
+            .simulateTiming = false,
+        })
+    {}
+};
+
+class LLBPXTSCLLogG8Timing : public LLBPX {
+public:
+    explicit LLBPXTSCLLogG8Timing(int access_delay)
+        : LLBPX(LLBPXConfig{
+            .tsclConfig = TSCLConfig{
+                .tageConfig = TageConfig{.LogG = 8, .LogB = 13},
+                .useSC = true,
+                .useLoop = true
+            },
+            .simulateTiming = true,
+            .accessDelay = access_delay,
+        })
+    {}
+};
 
 };  // namespace LLBP

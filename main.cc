@@ -113,6 +113,7 @@ bool tabledump = false;
 uint64_t max_br_instruction = 0;
 uint64_t warmup_instructions;
 uint64_t sim_instructions;
+int access_delay = 4;
 
 // Filter never taken branches from BPU update
 // This is the case for any commercial branch predictior.
@@ -170,6 +171,7 @@ bool process_command_line(int argc, char** argv)
           ("maxbrinst,m",  po::value<uint64_t>(&max_br_instruction)->default_value(dMAX), "max number of branches to simulate")
           ("inst-sim,n",   po::value<uint64_t>(&sim_instructions)->default_value(DEF_SIM), "max number of instructions to simulate")
           ("inst-warm,w",  po::value<uint64_t>(&warmup_instructions)->default_value(DEF_WARMUP), "number to instructions to warmup")
+          ("access-delay", po::value<int>(&access_delay)->default_value(4), "LLBP-X pattern-prefetch access delay in cycles")
         ;
 
         po::positional_options_description p;
@@ -213,6 +215,11 @@ int main(int argc, char* argv[]) {
     if (!result)
         return 1;
 
+    if (access_delay < 0) {
+        std::cerr << "Error: --access-delay must be non-negative\n";
+        return 1;
+    }
+
 
     // Extract the workload name from the path
     std::size_t pos2 = trace_path.rfind("/");
@@ -228,7 +235,7 @@ int main(int argc, char* argv[]) {
     // Init variables
     ///////////////////////////////////////////////
 
-    brpred = CreateBP(brmodel);
+    brpred = CreateBP(brmodel, access_delay);
 
     ChampSimTrace trace;
 
