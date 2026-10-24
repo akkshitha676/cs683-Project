@@ -40,6 +40,6 @@ class BasePredictor {
 };
 
 
-BasePredictor* CreateBP(std::string bp_name);
+BasePredictor* CreateBP(std::string bp_name, int access_delay = 4);
 
 // #endif  //__BASE_PREDICTOR__
