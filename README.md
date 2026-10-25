@@ -113,4 +113,4 @@ Checkpoint II examines timing-aware behavior and refines the storage/latency ana
 
 The checkpoint validates a 14-workload, three-capacity accuracy study. LogG=9 gives the strongest observed balance: it halves tagged entries and beats full-size TAGE-SC-L on 13 of 14 workloads. LogG=8 shows that same-capacity gains can conceal losses against the full-size reference.
 
-Repository: [CS683 project repository](https://github.com/akkshitha676/cs683-Project). The study builds on the original [LLBP-X artifact](https://github.com/dhschall/LLBP-X); see its documentation and license for original authorship, publication details, and reuse terms.
+Repository: [CS683 project repository](https://github.com/akkshitha676/llbpx-capacity-sensitivity). The study builds on the original [LLBP-X artifact](https://github.com/dhschall/LLBP-X); see its documentation and license for original authorship, publication details, and reuse terms.
