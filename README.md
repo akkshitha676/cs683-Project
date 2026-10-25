@@ -111,6 +111,18 @@ latency, IPC, energy, or physical implementation benefits.
 - `docs/`: experiment protocol, claims ledger, provenance, threshold mapping,
   and the preserved upstream README.
 
+## Presentation and recording materials
+
+The prepared nine-slide deck and five-minute narration script are included here:
+- [Editable PowerPoint deck](docs/presentation/Checkpoint1_LLBPX_5min.pptx)
+- [PDF slides](docs/presentation/Checkpoint1_LLBPX_5min.pdf)
+- [Five-minute speaker script](docs/presentation/Checkpoint1_5min_speaker_script.md)
+- [Presentation notes and limitations](docs/presentation/README.md)
+
+The presentation uses the same aggregate numbers as the result files below. It
+reports accuracy-only, zero-latency evidence and leaves timing and energy claims
+to Checkpoint II.
+
 ## Reproducing the analysis
 
 Build and trace-download instructions for the upstream simulator are preserved
@@ -124,10 +136,12 @@ Trace names and expected MD5 checksums are listed in
 [`results/checkpoint1/required-traces.md5`](results/checkpoint1/required-traces.md5).
 Trace downloads must pass checksum and gzip-integrity checks before evaluation.
 
-The published validation record confirms all 14 trace checksum and gzip checks
-passed, all 84 simulation runs completed, and the analysis validated paired
-instruction counts and the recorded MPKI calculations. See
-[`analysis_validation.txt`](results/checkpoint1/analysis_validation.txt) and
+The published trace-integrity log confirms that all 14 gzip integrity checks
+passed. Expected MD5 checksums are listed for independent trace verification.
+The runner console logs record the 84 completed simulator runs, and the
+analysis validation checks paired instruction counts and the recorded MPKI
+calculations. See [`full_trace_gzip_validation.log`](results/checkpoint1/full_trace_gzip_validation.log),
+[`analysis_validation.txt`](results/checkpoint1/analysis_validation.txt), and
 [`capacity_gate_report_summary.md`](results/checkpoint1/capacity_gate_report_summary.md).
 
 The completed Checkpoint I result files are provided for inspection. The
