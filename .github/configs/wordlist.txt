@@ -119,3 +119,4 @@ NodeApp
 kibibytes
 reproducibility
 scons
+SHA
