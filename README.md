@@ -58,13 +58,13 @@ For each workload:
 
 **Metric A : same-capacity improvement**
 
-Metric A = 100 × (T_s − X_s) / T_s
+Metric A = 100 × (T_s - X_s) / T_s
 
 This measures LLBP-X's gain over standalone TAGE-SC-L at the same capacity.
 
 **Metric B : full-size reference comparison**
 
-Metric B = 100 × (T_64 − X_s) / T_64
+Metric B = 100 × (T_64 - X_s) / T_64
 
 This measures whether reduced-capacity LLBP-X beats the original full-size baseline. At 64K, the metrics coincide. At smaller capacities, they answer different questions.
 
