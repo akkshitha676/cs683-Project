@@ -29,7 +29,6 @@ set -e
 
 
 
-## Parse the TRACES.list file
 ## TRACES can be commented out with '#'
 TRACES=""
 
@@ -71,7 +70,6 @@ N_SIM=$(( 200 * $d1M ))
 
 
 FLAGS=""
-# FLAGS="${FLAGS} --tabledump"
 FLAGS="${FLAGS} --simulate-btb"
 
 
@@ -92,6 +90,7 @@ for model in $BRMODELS; do
     for fn in $TRACES; do
 
         TRACE=$TRACE_DIR/$fn.champsim.trace.gz
+        TLOAD=""
 
         ## Create output directory
         OUTDIR="${OUT}/${fn}/"
