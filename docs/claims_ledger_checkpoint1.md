@@ -7,7 +7,7 @@
 - Workloads: 14 official evaluation traces
 - Trace checksums: all 14 passed
 - Gzip integrity: all 14 passed
-- Evaluation windows: 100M warmup, 200M measurement
+- Evaluation windows: 100M warm-up, 200M measurement
 - BTB simulation: enabled
 - Model for reported LLBP-X accuracy results: llbpx (simulateTiming=0, optW=0)
 
@@ -22,10 +22,11 @@ PHPWiki exact check:
 - ROI mispredictions: 616,930
 - ROI MPKI: 3.0847
 
-Evidence:
-- 64k_gate/results.csv
-- 64k_gate/runner_console.log
-- 64k_gate/provenance_config_audit.txt
+Evidence in this repository:
+- [64K result CSV](../results/checkpoint1/results_64k.csv)
+- [64K runner console log](../results/checkpoint1/logs/runner_console_64k.log)
+- [64K provenance record](provenance_64k.txt)
+- PHPWiki per-run evidence: [mwnginxfpm-wiki_llbpx.log](../results/checkpoint1/logs/64k_gate/mwnginxfpm-wiki_llbpx.log)
 
 ## Claim 2 — Full-size LLBP-X accuracy improvement
 
@@ -38,12 +39,12 @@ Status: VERIFIED, WITH COMPARABILITY CAVEATS
 - Median per-workload reduction: 11.92%.
 - Per-workload range: 2.00% to 28.47%.
 
-The paper reports an average of approximately 12.1%, with a range of 1.4% to 27% in §VII-A. Its averaging convention is not explicitly specified there. The results are close, but should not be described as an exact reproduction. The run uses the accuracy-only, zero-latency LLBP-X model.
+The paper reports an average of approximately 12.1%, with a range of 1.4% to 27% in §VII-A. Its averaging convention is not explicit in that discussion. The results are close, but are not an exact reproduction. The run uses the accuracy-only, zero-latency LLBP-X model.
 
 Evidence:
-- 64k_gate/results.csv
-- 64k_gate/runner_console.log
-- 64k_gate/logs/
+- [64K result CSV](../results/checkpoint1/results_64k.csv)
+- [64K runner console log](../results/checkpoint1/logs/runner_console_64k.log)
+- Per-workload logs are in results/checkpoint1/logs/64k_gate/ in the repository.
 
 ## Claim 3 — LogG=9 reduced-capacity result
 
@@ -60,10 +61,10 @@ Status: VERIFIED, INTERPRETATION SUPPORTED
   - LLBP-X beats full-size TAGE on 13/14 workloads.
 
 Evidence:
-- capacity_gate_logg9_logg8_2026-10-25/results_logg9.csv
-- capacity_gate_logg9_logg8_2026-10-25/capacity_metrics_per_trace.csv
-- capacity_gate_logg9_logg8_2026-10-25/runner_console.log
-- capacity_gate_logg9_logg8_2026-10-25/logs/
+- [LogG=9 result CSV](../results/checkpoint1/results_logg9.csv)
+- [Per-workload capacity metrics](../results/checkpoint1/capacity_metrics_per_trace.csv)
+- [Capacity runner console log](../results/checkpoint1/logs/runner_console_capacity.log)
+- Per-run logs are in results/checkpoint1/logs/capacity_gate/ in the repository.
 
 ## Claim 4 — LogG=8 reduced-capacity result
 
@@ -83,10 +84,10 @@ Status: VERIFIED, WORKLOAD-DEPENDENT
 Interpretation: the same-capacity improvement is large, but much of it is spent recovering the accuracy lost by shrinking the base TAGE predictor. The result is workload-dependent. Do not headline the 0.81% arithmetic mean without the per-workload distribution.
 
 Evidence:
-- capacity_gate_logg9_logg8_2026-10-25/results_logg8.csv
-- capacity_gate_logg9_logg8_2026-10-25/capacity_metrics_per_trace.csv
-- capacity_gate_logg9_logg8_2026-10-25/runner_console.log
-- capacity_gate_logg9_logg8_2026-10-25/logs/
+- [LogG=8 result CSV](../results/checkpoint1/results_logg8.csv)
+- [Per-workload capacity metrics](../results/checkpoint1/capacity_metrics_per_trace.csv)
+- [Capacity runner console log](../results/checkpoint1/logs/runner_console_capacity.log)
+- Per-run logs are in results/checkpoint1/logs/capacity_gate/ in the repository.
 
 ## Claim 5 — History threshold and Opt-W configuration
 
@@ -105,11 +106,11 @@ The PHPWiki LLBP-X log reports:
 
 The printed TAGE configuration is nhist=36, minhist=6, maxhist=3000, LogG=10, LogB=13.
 
-The runtime mapping associates table index 22 with history length 232. This is evidence for the implemented threshold convention; it is not a substitute for a complete source-level parameter-parity audit.
+The runtime mapping associates table index 22 with history length 232. This supports the implemented threshold convention. It does not replace a complete source-level parameter-parity audit.
 
 Evidence:
-- threshold_mapping_verification.txt
-- 64k_gate/logs/mwnginxfpm-wiki_llbpx.log
+- [Threshold mapping verification](threshold_mapping_verification.txt)
+- [PHPWiki LLBP-X run log](../results/checkpoint1/logs/64k_gate/mwnginxfpm-wiki_llbpx.log)
 
 ## Claim 6 — Storage trade-off
 
@@ -121,26 +122,24 @@ Using the second source-based TAGE storage formula as the primary estimate, and 
 - LogG=9 combined estimate: approximately 553.7 KiB, about 3.6% below LogG=10.
 - LogG=8 combined estimate: approximately 543.3 KiB, about 5.4% below LogG=10.
 
-An alternate TAGE accounting formula yields combined estimates of approximately 588.3, 560.8, and 547.0 KiB respectively, corresponding to reductions of about 4.7% and 7.0%. Explain the accounting difference if reporting this range.
+An alternate TAGE accounting formula yields combined estimates of approximately 588.3, 560.8, and 547.0 KiB respectively. These correspond to reductions of about 4.7% and 7.0%. The accounting difference must be explained when reporting this range.
 
 These are source-based estimates, not measured silicon area, energy, IPC, or cycle-accurate latency. The comparisons are not iso-storage comparisons against a 64 KiB baseline.
 
 ## Limitations and claims not established
 
 - The capacity experiments use the accuracy-only zero-latency model.
-- One 200M-instruction measurement window was used per trace and configuration.
+- One 200M-instruction measurement window is used per trace and configuration.
 - Timing, energy, IPC, and physical implementation benefits are not established.
-- Paper/artifact aggregation and finite-latency parity should be stated cautiously.
-- The paper's Figure 16b caption/text ambiguity should not be presented as resolved.
-- The older three-trace pilot CSV is exploratory and must not be used as a headline result.
-- Do not claim exact reproduction of the paper or iso-storage superiority.
+- Paper/artifact aggregation and finite-latency parity require cautious wording.
+- The paper's Figure 16b caption/text ambiguity remains unresolved.
+- The older three-trace pilot CSV is exploratory and is not a headline result.
+- The study does not claim exact reproduction of the paper or iso-storage superiority.
 
 ## Key definitions
 
-Metric A = 100 * (T_s - X_s) / T_s
-where T_s is standalone TAGE MPKI at the same capacity and X_s is LLBP-X MPKI at that capacity.
+Metric A = 100 × (T_s − X_s) / T_s, where T_s is standalone TAGE MPKI at the same capacity and X_s is LLBP-X MPKI at that capacity.
 
-Metric B = 100 * (T_64 - X_s) / T_64
-where T_64 is full-size 64K standalone TAGE MPKI.
+Metric B = 100 × (T_64 − X_s) / T_64, where T_64 is full-size 64K standalone TAGE MPKI.
 
 At 64K, Metric A and Metric B coincide. At smaller capacities, they answer different questions and must both be labelled.

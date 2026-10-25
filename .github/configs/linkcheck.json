@@ -1,27 +1,19 @@
 {
-    "ignorePatterns": [
-		{
-			"pattern": "^http://localhost:*"
-		},
-        {
-            "pattern": "^http://127.0.0.1:*"
-        },
-        {
-            "pattern": "^https://opensource.org*"
-        }
-    ],
-    "replacementPatterns": [
-        {
-            "pattern": "^/",
-            "replacement": "/github/workspace/"
-        }
-    ],
-    "httpHeaders": [
-        {
-            "urls": ["https://docs.github.com/"],
-            "headers": {
-                "Accept-Encoding": "zstd, br, gzip, deflate"
-            }
-        }
-    ]
+  "ignorePatterns": [
+    { "pattern": "^http://localhost(:.*)?$" },
+    { "pattern": "^http://127\\.0\\.0\\.1(:.*)?$" },
+    { "pattern": "^https://opensource\\.org/" },
+    { "pattern": "^https://zenodo\\.org/records/13133242/?$" },
+    { "pattern": "^https://doi\\.org/10\\.5281/zenodo\\.13133242/?$" },
+    { "pattern": "^https://doi\\.org/10\\.1109/MICRO61859\\.2024\\.00042/?$" }
+  ],
+  "replacementPatterns": [
+    { "pattern": "^/", "replacement": "/github/workspace/" }
+  ],
+  "httpHeaders": [
+    {
+      "urls": ["https://docs.github.com/"],
+      "headers": { "Accept-Encoding": "zstd, br, gzip, deflate" }
+    }
+  ]
 }
