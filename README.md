@@ -94,10 +94,7 @@ The study-specific implementation, experiment runners, validation, and reporting
 
 ## Presentation and recording materials
 
-The five-minute speaker script and presentation notes are versioned in this repository:
-
-- [Five-minute speaker script](docs/presentation/Checkpoint1_5min_speaker_script.md)
-- [Presentation notes and limitations](docs/presentation/README.md)
+Presentation notes and limitations are documented in [the presentation notes](docs/presentation/README.md). The speaker script and presentation files are supplied separately as submission materials.
 
 The editable PowerPoint and PDF export are supplied separately as checkpoint submission files. They are not stored as binary assets in this repository revision.
 
