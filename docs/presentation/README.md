@@ -10,4 +10,4 @@ The experiment uses the accuracy-only configuration (simulateTiming=0, optW=0). 
 
 The PHPWiki workload is listed in the result tables under the trace name mwnginxfpm-wiki. Keep the project README and result files synchronized with the script and any separate presentation export.
 
-The speaker script is about 650 words. At five minutes, this requires roughly 130 words per minute. Rehearse with a timer and shorten any sentence that feels rushed.
+The spoken narration is about 580 words, or roughly 116 words per minute over five minutes, leaving room for pauses. Rehearse with a timer and shorten any sentence that feels rushed.
