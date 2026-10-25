@@ -133,8 +133,8 @@ These are source-based estimates, not measured silicon area, energy, IPC, or cyc
 
 ## Key definitions
 
-Metric A = 100 × (T_s − X_s) / T_s, where T_s is standalone TAGE MPKI at the same capacity and X_s is LLBP-X MPKI at that capacity.
+Metric A = 100 × (T_s - X_s) / T_s, where T_s is standalone TAGE MPKI at the same capacity and X_s is LLBP-X MPKI at that capacity.
 
-Metric B = 100 × (T_64 − X_s) / T_64, where T_64 is full-size 64K standalone TAGE MPKI.
+Metric B = 100 × (T_64 - X_s) / T_64, where T_64 is full-size 64K standalone TAGE MPKI.
 
 At 64K, Metric A and Metric B coincide. At smaller capacities, they answer different questions and must both be labelled.
