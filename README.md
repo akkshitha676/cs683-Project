@@ -24,6 +24,7 @@ and beating the original full-size baseline. These are different comparisons.
 - Evaluation over the artifact's 14 official server workloads.
 - Matched runs using 100 million warmup instructions and 200 million measured
   instructions, with BTB simulation enabled.
+- 84 total runs: 28 at LogG=10, 28 at LogG=9, and 28 at LogG=8.
 - Per-run logs, result CSVs, trace-integrity records, provenance, and analysis
   scripts for the Checkpoint I evaluation.
 
@@ -122,6 +123,12 @@ tens of gigabytes. They are available from the upstream Zenodo artifact:
 Trace names and expected MD5 checksums are listed in
 [`results/checkpoint1/required-traces.md5`](results/checkpoint1/required-traces.md5).
 Trace downloads must pass checksum and gzip-integrity checks before evaluation.
+
+The published validation record confirms all 14 trace checksum and gzip checks
+passed, all 84 simulation runs completed, and the analysis validated paired
+instruction counts and the recorded MPKI calculations. See
+[`analysis_validation.txt`](results/checkpoint1/analysis_validation.txt) and
+[`capacity_gate_report_summary.md`](results/checkpoint1/capacity_gate_report_summary.md).
 
 The completed Checkpoint I result files are provided for inspection. The
 runner scripts resolve paths relative to the repository and write fresh runs
