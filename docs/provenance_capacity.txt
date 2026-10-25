@@ -1,0 +1,30 @@
+# Path note: original machine-specific paths are normalized to aliases. The SHA-256 values are preserved from the historical experiment record; some referenced external files and the compiled predictor binary are not included in this repository.
+
+========== RUN INVOCATION: 2026-10-24T19:40:55+00:00 ==========
+Source commit: 5da415efc2ffd76d6944fcf2cb306742b882d961
+Tracked source changes: none
+Working-tree status (untracked files preserved):
+?? llbpx-reduced-bimodal_Trace1-002_.log
+?? llbpx-reduced-bimodal_Trace2-003_.log
+?? llbpx-reduced-bimodal_Trace3-001_.log
+?? llbpx-reduced-tage_Trace1-002_.log
+?? llbpx-reduced-tage_Trace2-003_.log
+?? llbpx-reduced-tage_Trace3-001_.log
+?? llbpx-reduced-tagged_Trace1-002_.log
+?? llbpx-reduced-tagged_Trace2-003_.log
+?? llbpx-reduced-tagged_Trace3-001_.log
+?? llbpx_Trace1-002_.log
+?? llbpx_Trace2-003_.log
+?? llbpx_Trace3-001_.log
+?? llbpx_baseline_trace.log
+?? llbpx_reduced_tage_trace.log
+?? llbpx_timing_trace.log
+?? tage64kscl_Trace1-002_.log
+?? tage64kscl_Trace2-003_.log
+?? tage64kscl_Trace3-001_.log
+
+d7aff66067b66480127dd1921361a2147f29d4ee1fe429cefc14c236d7926621  local-build/predictor (binary not committed)
+0ee72b5c519cbc6b186d336cb7c4afbc70f57538e9360fad7fdc36818683747e  original-external-evidence/run_capacity_gate_logg9_logg8_2026-10-25.sh
+639a444aeb6525edcc738918e3f553c2e2fcedeb94e2ef1e2aa10ae5d45d74a5  original-external-evidence/required-traces.md5
+9f518cd5472cf3ccb0068524d9d6653ab253bd0cab3f14f65c19d717ba5f9198  original-external-evidence/analysis_protocol_2026-10-24.md
+3aaedec4a3e7d1a22be5b4ca09c9f4802a69cd942762233fa4d9d324fbf6e91e  original-external-evidence/64k_gate/results.csv

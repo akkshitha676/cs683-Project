@@ -1,0 +1,61 @@
+Checking predictor binary...
+./build/predictor: OK
+Checking completed trace validation...
+START [1/28] trace=mwnginxfpm-wiki model=tage64kscl
+DONE [1/28] trace=mwnginxfpm-wiki model=tage64kscl instructions=199999983 mispredictions=616930 MPKI=3.0847
+START [2/28] trace=mwnginxfpm-wiki model=llbpx
+DONE [2/28] trace=mwnginxfpm-wiki model=llbpx instructions=199999983 mispredictions=523464 MPKI=2.6173
+START [3/28] trace=dacapo-kafka model=tage64kscl
+DONE [3/28] trace=dacapo-kafka model=tage64kscl instructions=199999996 mispredictions=52191 MPKI=0.2610
+START [4/28] trace=dacapo-kafka model=llbpx
+DONE [4/28] trace=dacapo-kafka model=llbpx instructions=199999996 mispredictions=44076 MPKI=0.2204
+START [5/28] trace=dacapo-tomcat model=tage64kscl
+DONE [5/28] trace=dacapo-tomcat model=tage64kscl instructions=199999995 mispredictions=679276 MPKI=3.3964
+START [6/28] trace=dacapo-tomcat model=llbpx
+DONE [6/28] trace=dacapo-tomcat model=llbpx instructions=199999995 mispredictions=621779 MPKI=3.1089
+START [7/28] trace=dacapo-spring model=tage64kscl
+DONE [7/28] trace=dacapo-spring model=tage64kscl instructions=199999998 mispredictions=716268 MPKI=3.5813
+START [8/28] trace=dacapo-spring model=llbpx
+DONE [8/28] trace=dacapo-spring model=llbpx instructions=199999998 mispredictions=552097 MPKI=2.7605
+START [9/28] trace=renaissance-finagle-chirper model=tage64kscl
+DONE [9/28] trace=renaissance-finagle-chirper model=tage64kscl instructions=200000007 mispredictions=96605 MPKI=0.4830
+START [10/28] trace=renaissance-finagle-chirper model=llbpx
+DONE [10/28] trace=renaissance-finagle-chirper model=llbpx instructions=200000007 mispredictions=83455 MPKI=0.4173
+START [11/28] trace=renaissance-finagle-http model=tage64kscl
+DONE [11/28] trace=renaissance-finagle-http model=tage64kscl instructions=199999997 mispredictions=561723 MPKI=2.8086
+START [12/28] trace=renaissance-finagle-http model=llbpx
+DONE [12/28] trace=renaissance-finagle-http model=llbpx instructions=199999997 mispredictions=527827 MPKI=2.6391
+START [13/28] trace=benchbase-tpcc model=tage64kscl
+DONE [13/28] trace=benchbase-tpcc model=tage64kscl instructions=200000000 mispredictions=748843 MPKI=3.7442
+START [14/28] trace=benchbase-tpcc model=llbpx
+DONE [14/28] trace=benchbase-tpcc model=llbpx instructions=200000000 mispredictions=629974 MPKI=3.1499
+START [15/28] trace=benchbase-twitter model=tage64kscl
+DONE [15/28] trace=benchbase-twitter model=tage64kscl instructions=200000008 mispredictions=606215 MPKI=3.0311
+START [16/28] trace=benchbase-twitter model=llbpx
+DONE [16/28] trace=benchbase-twitter model=llbpx instructions=200000008 mispredictions=573284 MPKI=2.8664
+START [17/28] trace=benchbase-wikipedia model=tage64kscl
+DONE [17/28] trace=benchbase-wikipedia model=tage64kscl instructions=200000029 mispredictions=503749 MPKI=2.5187
+START [18/28] trace=benchbase-wikipedia model=llbpx
+DONE [18/28] trace=benchbase-wikipedia model=llbpx instructions=200000029 mispredictions=452185 MPKI=2.2609
+START [19/28] trace=nodeapp-nodeapp model=tage64kscl
+DONE [19/28] trace=nodeapp-nodeapp model=tage64kscl instructions=200000003 mispredictions=885009 MPKI=4.4250
+START [20/28] trace=nodeapp-nodeapp model=llbpx
+DONE [20/28] trace=nodeapp-nodeapp model=llbpx instructions=200000003 mispredictions=633032 MPKI=3.1652
+START [21/28] trace=charlie.1006518 model=tage64kscl
+DONE [21/28] trace=charlie.1006518 model=tage64kscl instructions=200000000 mispredictions=578240 MPKI=2.8912
+START [22/28] trace=charlie.1006518 model=llbpx
+DONE [22/28] trace=charlie.1006518 model=llbpx instructions=200000000 mispredictions=536626 MPKI=2.6831
+START [23/28] trace=delta.507252 model=tage64kscl
+DONE [23/28] trace=delta.507252 model=tage64kscl instructions=199999942 mispredictions=217034 MPKI=1.0852
+START [24/28] trace=delta.507252 model=llbpx
+DONE [24/28] trace=delta.507252 model=llbpx instructions=199999942 mispredictions=212691 MPKI=1.0635
+START [25/28] trace=merced.467915 model=tage64kscl
+DONE [25/28] trace=merced.467915 model=tage64kscl instructions=200000002 mispredictions=826316 MPKI=4.1316
+START [26/28] trace=merced.467915 model=llbpx
+DONE [26/28] trace=merced.467915 model=llbpx instructions=200000002 mispredictions=660229 MPKI=3.3011
+START [27/28] trace=whiskey.426708 model=tage64kscl
+DONE [27/28] trace=whiskey.426708 model=tage64kscl instructions=200000000 mispredictions=1076826 MPKI=5.3841
+START [28/28] trace=whiskey.426708 model=llbpx
+DONE [28/28] trace=whiskey.426708 model=llbpx instructions=200000000 mispredictions=1019835 MPKI=5.0992
+64K GATE COMPLETE: 28 runs
+Results CSV: /home/akkshitha/cs683_checkpoint1_2026-10-23/evidence/64k_gate/results.csv

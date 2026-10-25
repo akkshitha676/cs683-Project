@@ -1,0 +1,30 @@
+nohup: ignoring input
+Testing: traces/mwnginxfpm-wiki.champsim.trace.gz
+PASS: traces/mwnginxfpm-wiki.champsim.trace.gz
+Testing: traces/dacapo-kafka.champsim.trace.gz
+PASS: traces/dacapo-kafka.champsim.trace.gz
+Testing: traces/dacapo-tomcat.champsim.trace.gz
+PASS: traces/dacapo-tomcat.champsim.trace.gz
+Testing: traces/dacapo-spring.champsim.trace.gz
+PASS: traces/dacapo-spring.champsim.trace.gz
+Testing: traces/renaissance-finagle-chirper.champsim.trace.gz
+PASS: traces/renaissance-finagle-chirper.champsim.trace.gz
+Testing: traces/renaissance-finagle-http.champsim.trace.gz
+PASS: traces/renaissance-finagle-http.champsim.trace.gz
+Testing: traces/benchbase-tpcc.champsim.trace.gz
+PASS: traces/benchbase-tpcc.champsim.trace.gz
+Testing: traces/benchbase-twitter.champsim.trace.gz
+PASS: traces/benchbase-twitter.champsim.trace.gz
+Testing: traces/benchbase-wikipedia.champsim.trace.gz
+PASS: traces/benchbase-wikipedia.champsim.trace.gz
+Testing: traces/nodeapp-nodeapp.champsim.trace.gz
+PASS: traces/nodeapp-nodeapp.champsim.trace.gz
+Testing: traces/charlie.1006518.champsim.trace.gz
+PASS: traces/charlie.1006518.champsim.trace.gz
+Testing: traces/delta.507252.champsim.trace.gz
+PASS: traces/delta.507252.champsim.trace.gz
+Testing: traces/merced.467915.champsim.trace.gz
+PASS: traces/merced.467915.champsim.trace.gz
+Testing: traces/whiskey.426708.champsim.trace.gz
+PASS: traces/whiskey.426708.champsim.trace.gz
+ALL 14 GZIP INTEGRITY CHECKS PASSED

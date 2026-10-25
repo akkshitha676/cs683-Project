@@ -13,9 +13,22 @@ _deps
 
 
 build/
-results/
+# Ignore generated simulator outputs, except curated Checkpoint I evidence.
+/results/*
+!/results/checkpoint1/
 gem5/
 
 
 *.pred
 *.gz
+# Local exploratory pilot logs; preserve locally, do not publish.
+llbpx-reduced-bimodal_Trace*.log
+llbpx-reduced-tage_Trace*.log
+llbpx-reduced-tagged_Trace*.log
+llbpx_Trace*.log
+tage64kscl_Trace*.log
+llbpx_baseline_trace.log
+llbpx_reduced_tage_trace.log
+llbpx_timing_trace.log
+__pycache__/
+*.py[cod]

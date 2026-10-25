@@ -1,0 +1,97 @@
+# Path note: original machine-specific paths are normalized to aliases. The SHA-256 values are preserved from the historical experiment record; some referenced external files and the compiled predictor binary are not included in this repository.
+========== DATE ==========
+2026-10-24T19:33:10+00:00
+
+========== SOURCE REVISION ==========
+5da415efc2ffd76d6944fcf2cb306742b882d961
+Git working-tree status:
+?? llbpx-reduced-bimodal_Trace1-002_.log
+?? llbpx-reduced-bimodal_Trace2-003_.log
+?? llbpx-reduced-bimodal_Trace3-001_.log
+?? llbpx-reduced-tage_Trace1-002_.log
+?? llbpx-reduced-tage_Trace2-003_.log
+?? llbpx-reduced-tage_Trace3-001_.log
+?? llbpx-reduced-tagged_Trace1-002_.log
+?? llbpx-reduced-tagged_Trace2-003_.log
+?? llbpx-reduced-tagged_Trace3-001_.log
+?? llbpx_Trace1-002_.log
+?? llbpx_Trace2-003_.log
+?? llbpx_Trace3-001_.log
+?? llbpx_baseline_trace.log
+?? llbpx_reduced_tage_trace.log
+?? llbpx_timing_trace.log
+?? tage64kscl_Trace1-002_.log
+?? tage64kscl_Trace2-003_.log
+?? tage64kscl_Trace3-001_.log
+
+========== BINARY AND EVIDENCE HASHES ==========
+d7aff66067b66480127dd1921361a2147f29d4ee1fe429cefc14c236d7926621  build/predictor
+9f518cd5472cf3ccb0068524d9d6653ab253bd0cab3f14f65c19d717ba5f9198  original-external-evidence/analysis_protocol_2026-10-24.md
+b82a55e982ddad30f8e8b6ec8ddbb104e1d5d678d76a7eb2191631247deea5de  original-external-evidence/run_64k_gate.sh
+3aaedec4a3e7d1a22be5b4ca09c9f4802a69cd942762233fa4d9d324fbf6e91e  original-external-evidence/64k_gate/results.csv
+
+========== LOCAL MODEL REGISTRATION ==========
+8:#include "llbpx/llbpx.h"
+19:    } else if (bp_name == "tage-logg8scl") {
+25:    } else if (bp_name == "tage64kscl-reduced-tagged") {
+47:    } else if (bp_name == "llbpx") {
+49:    } else if (bp_name == "llbpx-logg8") {
+51:    } else if (bp_name == "llbpx-logg8-timing") {
+53:    } else if (bp_name == "llbpx-optw") {
+55:    } else if (bp_name == "llbpx-timing") {
+57:    } else if (bp_name == "llbpx-reduced-tage") {
+59:    } else if (bp_name == "llbpx-reduced-tagged") {
+61:    } else if (bp_name == "llbpx-reduced-bimodal") {
+63:    } else if (bp_name == "llbpx-reduced-tagged-timing") {
+65:    } else if (bp_name == "llbpx-reduced-bimodal-timing") {
+67:    } else if (bp_name == "llbpx-reduced-tage-timing") {
+
+========== LLBP-X CONFIGURATION ==========
+415:    const int numContexts;
+417:    const int numPatterns;
+447:    // functionality. Prefetching is only modelled if `simulateTiming`
+449:    const bool simulateTiming;
+461:    const int accessDelay;
+465:    const int adaptThreshold;
+466:    const int histLenThreshold;
+562:    int numPatterns = 16;
+563:    int numContexts = 1024*14;
+566:    int ctxAssoc = 7;
+567:    int ptrnAssoc = 4;
+577:    int numContexts = 1000000;
+578:    int numPatterns = 1000000;
+580:    int ctxAssoc = numContexts;
+581:    int ptrnAssoc = numPatterns;
+596:    int adaptThreshold = 7;
+597:    // int histLenThreshold = 17;
+598:    int histLenThreshold = 22;
+600:    int CitSize =  6*1024;
+601:    int CitAssoc = 6;
+606:    bool simulateTiming = false;
+608:    int accessDelay = 4;
+612:    printf("LLBP Config: NumPatterns=%i, NumContexts=%i, ctxAssoc=%i, ptrnAssoc=%i, "
+614:           "TTWidth=%i, CTWidth=%i, adaptThreshold=%i, histLenThreshold=%i, "
+615:           "CitSize=%i, CitAssoc=%i, BctxTTWidth=%i, "
+616:           "simMispFlush=%i, accessDelay=%i, optW=%i"
+618:           numPatterns, numContexts, ctxAssoc, ptrnAssoc,
+620:           TTWidth, CTWidth, adaptThreshold, histLenThreshold,
+621:           CitSize, CitAssoc, BCTWidth,
+622:           simulateTiming, accessDelay, optW
+645:                .simulateTiming = false,
+663:                .simulateTiming = true,
+664:                .accessDelay = access_delay,
+681:                // .simulateTiming = false,
+682:                .simulateTiming = true,
+684:                .accessDelay = access_delay,
+709:                .simulateTiming = false,
+726:            .simulateTiming = false,
+741:            .simulateTiming = false,
+755:            .simulateTiming = true,
+756:            .accessDelay = access_delay,
+770:            .simulateTiming = true,
+771:            .accessDelay = access_delay,
+785:            .simulateTiming = true,
+786:            .accessDelay = access_delay,
+803:            .simulateTiming = false,
+817:            .simulateTiming = true,
+818:            .accessDelay = access_delay,

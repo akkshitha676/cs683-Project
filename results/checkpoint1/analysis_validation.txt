@@ -1,0 +1,7 @@
+PASS: 28 rows at 64K, LogG=9, and LogG=8.
+PASS: expected model names and one paired run per workload.
+PASS: recorded MPKI matches 1000 * mispredictions / instructions.
+PASS: paired instruction counts match across capacities.
+PASS: standalone TAGE error rate is monotonic as capacity shrinks.
+PASS: LLBP-X error rate is monotonic as capacity shrinks.
+PASS: LLBP-X beats its same-capacity standalone baseline on all workloads.

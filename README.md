@@ -1,173 +1,159 @@
-# LLBP-X: The Last-Level Branch Predictor Revisited Artifact
+# LLBP-X Capacity-Sensitivity Study — CS683 Project
 
-<p align="left">
-    <a href="https://github.com/dhschall/LLBP-X/blob/main/LICENSE">
-        <img alt="GitHub" src="https://img.shields.io/badge/License-MIT-yellow.svg">
-    </a>
-    <a href="https://github.com/dhschall/LLBP-X/releases">
-        <img alt="GitHub release" src="https://img.shields.io/github/v/release/dhschall/LLBP-X">
-    </a>
-    <a href="https://doi.org/10.5281/zenodo.17807918"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.17807918.svg" alt="DOI"></a>
-    <a href="https://github.com/dhschall/LLBP-X/actions/workflows/build-and-run.yml">
-        <img alt="Build and test" src="https://github.com/dhschall/LLBP-X/actions/workflows/build-and-run.yml/badge.svg">
-    </a>
+This repository contains a CS683 research project based on the public
+[LLBP-X artifact](https://github.com/dhschall/LLBP-X). It studies whether
+LLBP-X can recover branch-prediction accuracy when the tagged tables in
+the base TAGE-SC-L predictor are reduced.
 
-</p>
+The source artifact is associated with *The Last-Level Branch Predictor
+Revisited* (HPCA 2026). This repository preserves the upstream implementation
+and records the additional capacity variants, experiment outputs, and analysis
+used for this project.
 
-> [!INFO]
-> This repository based on the original [LLBP](https://github.com/dhschall/LLBP) repository and contains an extended version: LLBP-X.
+## Research question
 
+**How much of the prediction accuracy lost by reducing the base TAGE-SC-L
+capacity can LLBP-X recover?**
 
+The key distinction is between improving over a smaller TAGE-SC-L baseline
+and beating the original full-size baseline. These are different comparisons.
 
-The **Last-Level Branch Predictor (LLBP)** is a microarchitectural approach that improves branch prediction accuracy through additional high-capacity storage backing the baseline TAGE predictor. The key insight is that LLBP breaks the branch predictor state into multiple program contexts, which can be thought of as a call chain. Each context comprises only a small number of patterns and can be prefetched ahead of time. This enables LLBP to store a large number of patterns in a high-capacity structure and prefetch only the patterns for the upcoming contexts into a small, fast structure to overcome the long access latency of the high-capacity structure (LLBP).
-LLBP was presented at [MICRO 2024](https://doi.org/10.1109/MICRO61859.2024.00042).
+## What this project adds
 
-**LLBP-X** is an enhancement of the original LLBP design by introducing _dynamic context depth adaptation_, which yields a significantly better distribution of patterns for hard-to-predict branches, thereby reducing both pattern set contention and pattern duplication.
-LLBP-X is presented at [HPCA 2026](https://conf.researchr.org/home/hpca-2026).
+- Reduced-capacity predictor variants at LogG=9 and LogG=8.
+- Evaluation over the artifact's 14 official server workloads.
+- Matched runs using 100 million warmup instructions and 200 million measured
+  instructions, with BTB simulation enabled.
+- Per-run logs, result CSVs, trace-integrity records, provenance, and analysis
+  scripts for the Checkpoint I evaluation.
 
-This repository contains the source code of the branch predictor models and infrastructure to evaluate LLBP-X's prediction accuracy.
+The capacity experiments use the accuracy-only LLBP-X configuration:
+timing simulation is disabled and `optW=0`. They therefore measure prediction
+accuracy, not cycle-accurate latency or full-system performance.
 
-The artifact consists of two main parts:
-1. The branch predictor simulator based on the CBP framework to evaluate the prediction accuracy of LLBP-X and other branch predictor models on server traces. The aim of this framework is to provide a fast and easy way to evaluate different branch predictor configurations. It does *not* model the full CPU pipeline, only the branch predictor.
-2. A gem5 implementation of LLBP-X to enable full-system simulations with gem5. (jump to [gem5 Simulation](#gem5-simulation) for details)
+## Main results
 
+The metrics below are calculated from the recorded instruction and
+misprediction counts. The geometric-mean ratio reduction is the primary
+normalized comparison; pooled reduction is reported separately.
 
-## CBP-based Branch Predictor Simulator
+| Comparison | Geometric-mean MPKI-ratio reduction | Pooled reduction |
+|---|---:|---:|
+| Full-size 64K LLBP-X vs. full-size TAGE-SC-L | 12.92% | 13.41% |
+| LogG=9 LLBP-X vs. same-capacity TAGE-SC-L (Metric A) | 21.37% | 19.98% |
+| LogG=9 LLBP-X vs. full-size TAGE-SC-L (Metric B) | 7.22% | 8.22% |
+| LogG=8 LLBP-X vs. same-capacity TAGE-SC-L (Metric A) | 32.34% | 27.82% |
+| LogG=8 LLBP-X vs. full-size TAGE-SC-L (Metric B) | 1.09% | 2.85% |
 
-### Prerequisites
+Against its same-capacity standalone baseline, LLBP-X improves on all 14
+workloads at both reduced capacities. Against the original full-size
+baseline, LogG=9 wins on 13 of 14 workloads, while LogG=8 wins on 6 of 14.
 
-The infrastructure and the following commands have been tested with the following system configuration:
+**Main insight:** a large improvement over a reduced-capacity baseline does
+not necessarily mean the reduced-capacity design beats full-size TAGE-SC-L.
+LogG=9 gives the more consistent result; LogG=8 is workload-dependent.
 
-* Ubuntu 22.04.2 LTS
-* gcc 11.4.0
-* cmake 3.22.1
+The full-size standalone TAGE-SC-L MPKI values match the paper's Table I to
+two decimal places according to the project's independent result review.
+The paper reports approximately 12.1% average improvement for standard
+LLBP-X in §VII-A. The comparison is not an exact reproduction: the paper's
+aggregation convention is not explicit in that discussion, and the current
+runs use the accuracy-only, zero-latency model.
 
-> See the [CI pipeline](https://github.com/dhschall/LLBP-X/actions/workflows/build-and-run.yml) for other tested system configurations.
+## Metric definitions
 
+For each workload:
 
+- \(T_s\): standalone TAGE-SC-L MPKI at the selected capacity.
+- \(X_s\): LLBP-X MPKI at that same capacity.
+- \(T_{64}\): full-size 64K standalone TAGE-SC-L MPKI.
 
-### Install Dependencies
+**Metric A — same-capacity improvement**
 
-```bash
-# Install cmake
-sudo apt install -y cmake libboost-all-dev build-essential pip parallel wget
+\[
+100\frac{T_s-X_s}{T_s}
+\]
 
-# Python dependencies for plotting.
-pip install -r analysis/requirements.txt
+This measures LLBP-X's gain over the standalone baseline at the same capacity.
 
-```
+**Metric B — full-size reference comparison**
 
+\[
+100\frac{T_{64}-X_s}{T_{64}}
+\]
 
-### Build the project
+This measures whether reduced-capacity LLBP-X beats the original full-size
+TAGE-SC-L baseline. At 64K, the two metrics coincide; at smaller capacities,
+they answer different questions.
 
-```bash
-mkdir build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Debug ..
-cd ..
-# Build the simulator
-cmake --build ./build -j 8
-```
+Geometric-mean ratio reduction, arithmetic mean of per-workload percentages,
+and pooled reduction are distinct summaries. Always label the aggregation
+method when reporting a number.
 
-### Server traces
+## Experimental configurations
 
-The traces use to evaluate LLBP collected by running the server applications on gem5 in full-system mode. The OS of the disk image is Ubuntu 20.04 and the kernel version is 5.4.84. The traces are in the [ChampSim](https://github.com/ChampSim/ChampSim) format and contains both user and kernel space instructions. The traces are available on Zenodo at [10.5281/zenodo.13133242](https://doi.org/10.5281/zenodo.13133242).
+| Capacity point | Standalone baseline | LLBP-X variant | TAGE configuration |
+|---|---|---|---|
+| Full size | `tage64kscl` | `llbpx` | LogG=10, LogB=13 |
+| LogG=9 | `tage64kscl-reduced-tagged` | `llbpx-reduced-tagged` | LogG=9, LogB=13 |
+| LogG=8 | `tage-logg8scl` | `llbpx-logg8` | LogG=8, LogB=13 |
 
-The `download_traces.sh` script in the `scripts` folder will download all traces from Zenodo and store them in the `traces` directory.:
+The runs use the same workload windows and BTB setting. They do not establish
+latency, IPC, energy, or physical implementation benefits.
 
-```bash
-./scripts/download_traces.sh
-```
+## Repository layout
 
+- `bpmodels/`: predictor implementations and model registrations.
+- `scripts/`: build, trace-download, evaluation, and analysis scripts.
+- `results/checkpoint1/`: compact result CSVs, per-workload metrics, and raw
+  experiment logs for Checkpoint I.
+- `docs/`: experiment protocol, claims ledger, provenance, threshold mapping,
+  and the preserved upstream README.
 
-### Run the simulator
+## Reproducing the analysis
 
-The simulator can be run with the following command and takes as inputs the trace file, the branch predictor model, the number of warmup instructions, and the number of simulation instructions.
-The branch predictor model can be either `tage64kscl`, `tage512kscl`, `llbp`, `llbp-timing`, `llbpx`, or `llbpx-timing`.
-> The definition of the branch predictor models can be found in the `bpmodels/base_predictor.cc` file.
+Build and trace-download instructions for the upstream simulator are preserved
+in [`docs/UPSTREAM_README.md`](docs/UPSTREAM_README.md).
 
-```bash
-./build/predictor --model <predictor> -w <warmup instructions> -n <simulation instructions> <trace>
-```
+The server traces are not redistributed in this repository because they occupy
+tens of gigabytes. They are available from the upstream Zenodo artifact:
+[10.5281/zenodo.13133242](https://zenodo.org/records/13133242).
 
-For convenience, the simulator contains a script to run the experiments on all evaluated benchmarks for a given branch predictor model (`./scripts/eval_benchmarks.sh <predictor>`).
-The results in the form of a stats file are stored in the `results` directory. Note, the simulator will print out some intermediate results after every 5M instructions, which is useful to monitor the progress of the simulation.
+Trace names and expected MD5 checksums are listed in
+[`results/checkpoint1/required-traces.md5`](results/checkpoint1/required-traces.md5).
+Trace downloads must pass checksum and gzip-integrity checks before evaluation.
 
+The completed Checkpoint I result files are provided for inspection. The
+runner scripts resolve paths relative to the repository and write fresh runs
+under `results/checkpoint1/reruns/`, preserving the published results. A rerun
+requires the original traces, successful trace-integrity validation, a build
+whose predictor binary matches the recorded checksum, and a clean tracked
+working tree. The capacity runner also verifies that the validated source
+commit is an ancestor of the checked-out commit.
 
-### Plot results
+## Storage estimates
 
-The Jupyter notebook (`./analysis/mpki.ipynb`) can be used to parse the statistics file and plot the branch MPKI for different branch predictor models.
+The primary source-based accounting estimates combined storage of approximately
+574.5 KiB for LogG=10, 553.7 KiB for LogG=9, and 543.3 KiB for LogG=8. These
+correspond to estimated reductions of about 3.6% and 5.4% for LogG=9 and LogG=8
+relative to LogG=10. An alternative source-based accounting method gives
+somewhat different totals; see the claims ledger.
 
-To reproduce a similar graph as in the paper (Figure 9), we provide a separate script (`./scripts/eval_all.sh`) that runs the experiments for all evaluated branch predictor models and benchmarks.
+These are estimates from source-level parameters, not physical silicon-area
+or energy measurements. These experiments are not iso-storage comparisons
+against a 64 KiB baseline.
 
-> *Note:* As we integrated the LLBP with ChampSim for the paper, the results might slightly differ from the presented numbers in the paper.
+## Checkpoint II direction
 
-The script can be run as follows:
+The next stage will investigate timing-aware behavior and refine the
+storage/latency analysis. Any latency, energy, IPC, or physical-design claims
+require separate evidence and are not established by Checkpoint I.
 
-```bash
-./scripts/eval_all.sh
-```
-Once the runs are complete, open the Jupyter notebook and hit 'Run all cells'.
+## Attribution and license
 
-
-## gem5 Simulation
-
-For simulating LLBP-X in gem5, we provide an implementation of LLBP-X based on CBP model described above. For implementing LLBP-X in gem5, we tried to reuse as much of the existing TAGE-SC-L implementation as possible to reduce code redundancy and enable easy integration into gem5. However, due to differences in the code structure of gem5 and CBP, there may be slight differences in the prediction accuracy of the models.
-
-### Prerequisites
-To simulate LLBP-X in gem5, you need to have gem5 cloned with all its prerequisites installed. The LLBP-X implementation has been tested with gem5 version v25.1.0.0. For further details on how to install gem5, please refer to the official [gem5 documentation](https://www.gem5.org/documentation/).
-
-
-### Integrate and build LLBP-X in gem5
-To integrate LLBP-X into gem5, copy the contents of the `gem5models` folder into the `src/cpu/pred` directory of your gem5 installation. Furthermore, apply the patch `./scripts/llbpx.patch` which updates the SCons scripts and the TAGE-SC-L models to enable the integration. Then rebuild gem5.
-> Note that you can use the provided `./scripts/setup_gem5.sh` script, which will clone gem5, check out a compatible commit, copy the LLBP-X files, and build gem5 for you.
-> The model is compatible with gem5 version v25.1.0.0 and later.
-
-```bash
-cd <path-to-gem5>/
-# Copy LLBP-X files
-cp -r <path/to/LLBP-X>/gem5models/* src/cpu/pred/
-# Apply patch
-git apply <path/to/LLBP-X>/scripts/llbpx.patch
-# Build gem5
-scons build/ARM/gem5.opt -j`nproc`
-```
-
-
-### Run LLBP-X in gem5
-
-The `scripts` folder contains a simple configuration script (`se-llbp.py`) to run a hello world program in gem5's syscall emulation mode. You can run the simulation as follows:
-
-```bash
-./build/ARM/gem5.opt ./../scripts/se-llbp.py --bp=LLBPX
-```
-This will run the Hello World program with LLBP-X as the branch predictor. Can change the `--bp` argument to `LLBPX`, `LLBP`, or `TSL64k` to simulate the other branch predictor models.
-
-To quickly run all models and collect the branch mispredictions run:
-```bash
-./scripts/run_all_gem5.sh
-```
-It will simulate all three models and print the branch mispredictions at the end.
-
-## Citation
-If you use our work, please cite the paper:
-```
-@inproceedings{schall2026llbpx,
-  title={The Last-Level Branch Predictor Revisited},
-  author={Schall, David and  Ďuračková, Mária and Grot, Boris},
-  booktitle={Proceedings of the 32nd IEEE International Symposium on High-Performance Computer Architecture (HPCA-32)},
-  year={2026}
-}
-```
-
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## Contact
-
-David Schall - [GitHub](https://github.com/dhschall), [Website](https://dhschall.github.io/), [Mail](mailto:david.schall@tum.de)
-
-## Acknowledgements
-The authors thank the anonymous reviewers as well as the members of the Systems Research Group at the Technical University of Munich and the EASE Lab team at the University of Edinburgh for their valuable feedback on this work.
-We are grateful to Caeden Whitaker, Mike Jennrich, and Matt Sinclair from the University of Wisconsin-Madison for their assistance with the initial gem5 implementation of LLBP, as well as to Phillip Assmann from the Technical University of Munich for his significant efforts in improving the model's correctness during his thesis work.
+This project builds on the original
+[LLBP-X repository](https://github.com/dhschall/LLBP-X) and its associated
+paper. Please consult the upstream project and preserved license for original
+authors, publication details, and reuse terms. The source tree includes the
+upstream `LICENSE`; contributions and results specific to this CS683 study
+are documented in the checkpoint evidence.

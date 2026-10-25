@@ -1,0 +1,116 @@
+START [1/56] capacity=logg9 trace=mwnginxfpm-wiki role=baseline model=tage64kscl-reduced-tagged
+DONE [1/56] capacity=logg9 trace=mwnginxfpm-wiki role=baseline instructions=199999983 mispredictions=825172 MPKI=4.1259
+START [2/56] capacity=logg9 trace=mwnginxfpm-wiki role=llbpx model=llbpx-reduced-tagged
+DONE [2/56] capacity=logg9 trace=mwnginxfpm-wiki role=llbpx instructions=199999983 mispredictions=587169 MPKI=2.9358
+START [3/56] capacity=logg9 trace=dacapo-kafka role=baseline model=tage64kscl-reduced-tagged
+DONE [3/56] capacity=logg9 trace=dacapo-kafka role=baseline instructions=199999996 mispredictions=71918 MPKI=0.3596
+START [4/56] capacity=logg9 trace=dacapo-kafka role=llbpx model=llbpx-reduced-tagged
+DONE [4/56] capacity=logg9 trace=dacapo-kafka role=llbpx instructions=199999996 mispredictions=49969 MPKI=0.2498
+START [5/56] capacity=logg9 trace=dacapo-tomcat role=baseline model=tage64kscl-reduced-tagged
+DONE [5/56] capacity=logg9 trace=dacapo-tomcat role=baseline instructions=199999995 mispredictions=766486 MPKI=3.8324
+START [6/56] capacity=logg9 trace=dacapo-tomcat role=llbpx model=llbpx-reduced-tagged
+DONE [6/56] capacity=logg9 trace=dacapo-tomcat role=llbpx instructions=199999995 mispredictions=653666 MPKI=3.2683
+START [7/56] capacity=logg9 trace=dacapo-spring role=baseline model=tage64kscl-reduced-tagged
+DONE [7/56] capacity=logg9 trace=dacapo-spring role=baseline instructions=199999998 mispredictions=779932 MPKI=3.8997
+START [8/56] capacity=logg9 trace=dacapo-spring role=llbpx model=llbpx-reduced-tagged
+DONE [8/56] capacity=logg9 trace=dacapo-spring role=llbpx instructions=199999998 mispredictions=582669 MPKI=2.9133
+START [9/56] capacity=logg9 trace=renaissance-finagle-chirper role=baseline model=tage64kscl-reduced-tagged
+DONE [9/56] capacity=logg9 trace=renaissance-finagle-chirper role=baseline instructions=200000007 mispredictions=152342 MPKI=0.7617
+START [10/56] capacity=logg9 trace=renaissance-finagle-chirper role=llbpx model=llbpx-reduced-tagged
+DONE [10/56] capacity=logg9 trace=renaissance-finagle-chirper role=llbpx instructions=200000007 mispredictions=88308 MPKI=0.4415
+START [11/56] capacity=logg9 trace=renaissance-finagle-http role=baseline model=tage64kscl-reduced-tagged
+DONE [11/56] capacity=logg9 trace=renaissance-finagle-http role=baseline instructions=199999997 mispredictions=609411 MPKI=3.0471
+START [12/56] capacity=logg9 trace=renaissance-finagle-http role=llbpx model=llbpx-reduced-tagged
+DONE [12/56] capacity=logg9 trace=renaissance-finagle-http role=llbpx instructions=199999997 mispredictions=543634 MPKI=2.7182
+START [13/56] capacity=logg9 trace=benchbase-tpcc role=baseline model=tage64kscl-reduced-tagged
+DONE [13/56] capacity=logg9 trace=benchbase-tpcc role=baseline instructions=200000000 mispredictions=871355 MPKI=4.3568
+START [14/56] capacity=logg9 trace=benchbase-tpcc role=llbpx model=llbpx-reduced-tagged
+DONE [14/56] capacity=logg9 trace=benchbase-tpcc role=llbpx instructions=200000000 mispredictions=679456 MPKI=3.3973
+START [15/56] capacity=logg9 trace=benchbase-twitter role=baseline model=tage64kscl-reduced-tagged
+DONE [15/56] capacity=logg9 trace=benchbase-twitter role=baseline instructions=200000008 mispredictions=651942 MPKI=3.2597
+START [16/56] capacity=logg9 trace=benchbase-twitter role=llbpx model=llbpx-reduced-tagged
+DONE [16/56] capacity=logg9 trace=benchbase-twitter role=llbpx instructions=200000008 mispredictions=594225 MPKI=2.9711
+START [17/56] capacity=logg9 trace=benchbase-wikipedia role=baseline model=tage64kscl-reduced-tagged
+DONE [17/56] capacity=logg9 trace=benchbase-wikipedia role=baseline instructions=200000029 mispredictions=589784 MPKI=2.9489
+START [18/56] capacity=logg9 trace=benchbase-wikipedia role=llbpx model=llbpx-reduced-tagged
+DONE [18/56] capacity=logg9 trace=benchbase-wikipedia role=llbpx instructions=200000029 mispredictions=476327 MPKI=2.3816
+START [19/56] capacity=logg9 trace=nodeapp-nodeapp role=baseline model=tage64kscl-reduced-tagged
+DONE [19/56] capacity=logg9 trace=nodeapp-nodeapp role=baseline instructions=200000003 mispredictions=1077685 MPKI=5.3884
+START [20/56] capacity=logg9 trace=nodeapp-nodeapp role=llbpx model=llbpx-reduced-tagged
+DONE [20/56] capacity=logg9 trace=nodeapp-nodeapp role=llbpx instructions=200000003 mispredictions=689428 MPKI=3.4471
+START [21/56] capacity=logg9 trace=charlie.1006518 role=baseline model=tage64kscl-reduced-tagged
+DONE [21/56] capacity=logg9 trace=charlie.1006518 role=baseline instructions=200000000 mispredictions=607549 MPKI=3.0377
+START [22/56] capacity=logg9 trace=charlie.1006518 role=llbpx model=llbpx-reduced-tagged
+DONE [22/56] capacity=logg9 trace=charlie.1006518 role=llbpx instructions=200000000 mispredictions=555208 MPKI=2.7760
+START [23/56] capacity=logg9 trace=delta.507252 role=baseline model=tage64kscl-reduced-tagged
+DONE [23/56] capacity=logg9 trace=delta.507252 role=baseline instructions=199999942 mispredictions=241123 MPKI=1.2056
+START [24/56] capacity=logg9 trace=delta.507252 role=llbpx model=llbpx-reduced-tagged
+DONE [24/56] capacity=logg9 trace=delta.507252 role=llbpx instructions=199999942 mispredictions=224014 MPKI=1.1201
+START [25/56] capacity=logg9 trace=merced.467915 role=baseline model=tage64kscl-reduced-tagged
+DONE [25/56] capacity=logg9 trace=merced.467915 role=baseline instructions=200000002 mispredictions=977105 MPKI=4.8855
+START [26/56] capacity=logg9 trace=merced.467915 role=llbpx model=llbpx-reduced-tagged
+DONE [26/56] capacity=logg9 trace=merced.467915 role=llbpx instructions=200000002 mispredictions=732058 MPKI=3.6603
+START [27/56] capacity=logg9 trace=whiskey.426708 role=baseline model=tage64kscl-reduced-tagged
+DONE [27/56] capacity=logg9 trace=whiskey.426708 role=baseline instructions=200000000 mispredictions=1143524 MPKI=5.7176
+START [28/56] capacity=logg9 trace=whiskey.426708 role=llbpx model=llbpx-reduced-tagged
+DONE [28/56] capacity=logg9 trace=whiskey.426708 role=llbpx instructions=200000000 mispredictions=1038314 MPKI=5.1916
+START [29/56] capacity=logg8 trace=mwnginxfpm-wiki role=baseline model=tage-logg8scl
+DONE [29/56] capacity=logg8 trace=mwnginxfpm-wiki role=baseline instructions=199999983 mispredictions=1178138 MPKI=5.8907
+START [30/56] capacity=logg8 trace=mwnginxfpm-wiki role=llbpx model=llbpx-logg8
+DONE [30/56] capacity=logg8 trace=mwnginxfpm-wiki role=llbpx instructions=199999983 mispredictions=667369 MPKI=3.3368
+START [31/56] capacity=logg8 trace=dacapo-kafka role=baseline model=tage-logg8scl
+DONE [31/56] capacity=logg8 trace=dacapo-kafka role=baseline instructions=199999996 mispredictions=112529 MPKI=0.5626
+START [32/56] capacity=logg8 trace=dacapo-kafka role=llbpx model=llbpx-logg8
+DONE [32/56] capacity=logg8 trace=dacapo-kafka role=llbpx instructions=199999996 mispredictions=54681 MPKI=0.2734
+START [33/56] capacity=logg8 trace=dacapo-tomcat role=baseline model=tage-logg8scl
+DONE [33/56] capacity=logg8 trace=dacapo-tomcat role=baseline instructions=199999995 mispredictions=853672 MPKI=4.2684
+START [34/56] capacity=logg8 trace=dacapo-tomcat role=llbpx model=llbpx-logg8
+DONE [34/56] capacity=logg8 trace=dacapo-tomcat role=llbpx instructions=199999995 mispredictions=684106 MPKI=3.4205
+START [35/56] capacity=logg8 trace=dacapo-spring role=baseline model=tage-logg8scl
+DONE [35/56] capacity=logg8 trace=dacapo-spring role=baseline instructions=199999998 mispredictions=843290 MPKI=4.2165
+START [36/56] capacity=logg8 trace=dacapo-spring role=llbpx model=llbpx-logg8
+DONE [36/56] capacity=logg8 trace=dacapo-spring role=llbpx instructions=199999998 mispredictions=616037 MPKI=3.0802
+START [37/56] capacity=logg8 trace=renaissance-finagle-chirper role=baseline model=tage-logg8scl
+DONE [37/56] capacity=logg8 trace=renaissance-finagle-chirper role=baseline instructions=200000007 mispredictions=361665 MPKI=1.8083
+START [38/56] capacity=logg8 trace=renaissance-finagle-chirper role=llbpx model=llbpx-logg8
+DONE [38/56] capacity=logg8 trace=renaissance-finagle-chirper role=llbpx instructions=200000007 mispredictions=97657 MPKI=0.4883
+START [39/56] capacity=logg8 trace=renaissance-finagle-http role=baseline model=tage-logg8scl
+DONE [39/56] capacity=logg8 trace=renaissance-finagle-http role=baseline instructions=199999997 mispredictions=743596 MPKI=3.7180
+START [40/56] capacity=logg8 trace=renaissance-finagle-http role=llbpx model=llbpx-logg8
+DONE [40/56] capacity=logg8 trace=renaissance-finagle-http role=llbpx instructions=199999997 mispredictions=563657 MPKI=2.8183
+START [41/56] capacity=logg8 trace=benchbase-tpcc role=baseline model=tage-logg8scl
+DONE [41/56] capacity=logg8 trace=benchbase-tpcc role=baseline instructions=200000000 mispredictions=1007379 MPKI=5.0369
+START [42/56] capacity=logg8 trace=benchbase-tpcc role=llbpx model=llbpx-logg8
+DONE [42/56] capacity=logg8 trace=benchbase-tpcc role=llbpx instructions=200000000 mispredictions=720449 MPKI=3.6022
+START [43/56] capacity=logg8 trace=benchbase-twitter role=baseline model=tage-logg8scl
+DONE [43/56] capacity=logg8 trace=benchbase-twitter role=baseline instructions=200000008 mispredictions=708481 MPKI=3.5424
+START [44/56] capacity=logg8 trace=benchbase-twitter role=llbpx model=llbpx-logg8
+DONE [44/56] capacity=logg8 trace=benchbase-twitter role=llbpx instructions=200000008 mispredictions=616966 MPKI=3.0848
+START [45/56] capacity=logg8 trace=benchbase-wikipedia role=baseline model=tage-logg8scl
+DONE [45/56] capacity=logg8 trace=benchbase-wikipedia role=baseline instructions=200000029 mispredictions=749702 MPKI=3.7485
+START [46/56] capacity=logg8 trace=benchbase-wikipedia role=llbpx model=llbpx-logg8
+DONE [46/56] capacity=logg8 trace=benchbase-wikipedia role=llbpx instructions=200000029 mispredictions=512263 MPKI=2.5613
+START [47/56] capacity=logg8 trace=nodeapp-nodeapp role=baseline model=tage-logg8scl
+DONE [47/56] capacity=logg8 trace=nodeapp-nodeapp role=baseline instructions=200000003 mispredictions=1214528 MPKI=6.0726
+START [48/56] capacity=logg8 trace=nodeapp-nodeapp role=llbpx model=llbpx-logg8
+DONE [48/56] capacity=logg8 trace=nodeapp-nodeapp role=llbpx instructions=200000003 mispredictions=739036 MPKI=3.6952
+START [49/56] capacity=logg8 trace=charlie.1006518 role=baseline model=tage-logg8scl
+DONE [49/56] capacity=logg8 trace=charlie.1006518 role=baseline instructions=200000000 mispredictions=642854 MPKI=3.2143
+START [50/56] capacity=logg8 trace=charlie.1006518 role=llbpx model=llbpx-logg8
+DONE [50/56] capacity=logg8 trace=charlie.1006518 role=llbpx instructions=200000000 mispredictions=573515 MPKI=2.8676
+START [51/56] capacity=logg8 trace=delta.507252 role=baseline model=tage-logg8scl
+DONE [51/56] capacity=logg8 trace=delta.507252 role=baseline instructions=199999942 mispredictions=278191 MPKI=1.3910
+START [52/56] capacity=logg8 trace=delta.507252 role=llbpx model=llbpx-logg8
+DONE [52/56] capacity=logg8 trace=delta.507252 role=llbpx instructions=199999942 mispredictions=243575 MPKI=1.2179
+START [53/56] capacity=logg8 trace=merced.467915 role=baseline model=tage-logg8scl
+DONE [53/56] capacity=logg8 trace=merced.467915 role=baseline instructions=200000002 mispredictions=1069219 MPKI=5.3461
+START [54/56] capacity=logg8 trace=merced.467915 role=llbpx model=llbpx-logg8
+DONE [54/56] capacity=logg8 trace=merced.467915 role=llbpx instructions=200000002 mispredictions=775629 MPKI=3.8781
+START [55/56] capacity=logg8 trace=whiskey.426708 role=baseline model=tage-logg8scl
+DONE [55/56] capacity=logg8 trace=whiskey.426708 role=baseline instructions=200000000 mispredictions=1226272 MPKI=6.1314
+START [56/56] capacity=logg8 trace=whiskey.426708 role=llbpx model=llbpx-logg8
+DONE [56/56] capacity=logg8 trace=whiskey.426708 role=llbpx instructions=200000000 mispredictions=1067600 MPKI=5.3380
+CAPACITY CAMPAIGN COMPLETE
+LogG9 rows: 28 / 28
+LogG8 rows: 28 / 28
+Results directory: /home/akkshitha/cs683_checkpoint1_2026-10-23/evidence/capacity_gate_logg9_logg8_2026-10-25

@@ -1,0 +1,8 @@
+LLBP-X runtime configuration verification
+2026-10-25T14:12:31+00:00
+
+LLBP Config: NumPatterns=16, NumContexts=14336, ctxAssoc=7, ptrnAssoc=4, CtrWidth=3, ReplCtrWidth=16, CtxReplCtrWidth=3, pbSize=64, TTWidth=13, CTWidth=14, adaptThreshold=7, histLenThreshold=22, CitSize=6144, CitAssoc=6, BctxTTWidth=16, simMispFlush=0, accessDelay=4, optW=0
+
+22=>15:3:63:232
+
+TAGE Config: nhist=36 minhist=6 maxhist=3000 LogG=10 LogB=13 Tbits=8 nbanklow=10 nbankhigh=20 born=13 assoc_start=9 assoc_end=23
