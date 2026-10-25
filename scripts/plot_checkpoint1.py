@@ -231,6 +231,87 @@ def save_reduction_plot(summary, output_dir):
     return path
 
 
+def save_aggregate_plot(summary, output_dir):
+    capacities = ("LogG10", "LogG9", "LogG8")
+    labels = ("64K reference", "LogG=9", "LogG=8")
+    metric_a = [summary[capacity]["metric_a_geomean"] for capacity in capacities]
+    metric_b = [summary[capacity]["metric_b_geomean"] for capacity in capacities]
+    positions = list(range(len(capacities)))
+    width = 0.34
+    fig, ax = plt.subplots(figsize=(8.7, 4.2))
+    bars_a = ax.bar([x - width / 2 for x in positions], metric_a, width, label="A: vs same-capacity TAGE")
+    bars_b = ax.bar([x + width / 2 for x in positions], metric_b, width, label="B: vs full-size 64K TAGE")
+    ax.axhline(0, linewidth=0.8)
+    ax.set_ylabel("Geometric-mean MPKI-ratio reduction (%)")
+    ax.set_xticks(positions)
+    ax.set_xticklabels(labels)
+    ax.set_ylim(0, max(metric_a) + 7)
+    ax.grid(axis="y", alpha=0.3)
+    ax.set_axisbelow(True)
+    for bars in (bars_a, bars_b):
+        ax.bar_label(bars, fmt="%.2f%%", padding=2, fontsize=8)
+    ax.legend(frameon=False, fontsize=8)
+    fig.tight_layout()
+    path = output_dir / "aggregate_metrics.png"
+    fig.savefig(path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    return path
+
+
+def save_workload_metric_b_plot(loaded, output_dir):
+    traces = sorted(loaded["LogG10"]["traces"], key=lambda trace: LABELS[trace].lower())
+    reference = [loaded["LogG10"]["data"][(trace, "tage64kscl")] for trace in traces]
+    test9 = [get_pair(loaded, "LogG9", trace)[1] for trace in traces]
+    test8 = [get_pair(loaded, "LogG8", trace)[1] for trace in traces]
+    value9 = [
+        100.0 * (ref["rate"] - test["rate"]) / ref["rate"]
+        for ref, test in zip(reference, test9)
+    ]
+    value8 = [
+        100.0 * (ref["rate"] - test["rate"]) / ref["rate"]
+        for ref, test in zip(reference, test8)
+    ]
+    positions = list(range(len(traces)))
+    height = 0.34
+    fig, ax = plt.subplots(figsize=(11.8, 4.5))
+    ax.barh([y - height / 2 for y in positions], value9, height, label="LogG=9")
+    ax.barh([y + height / 2 for y in positions], value8, height, label="LogG=8")
+    ax.axvline(0, linewidth=0.9)
+    ax.set_yticks(positions)
+    ax.set_yticklabels([LABELS[trace] for trace in traces], fontsize=8)
+    ax.set_xlabel("Metric B: MPKI reduction vs full-size 64K TAGE (%)")
+    ax.grid(axis="x", alpha=0.3)
+    ax.set_axisbelow(True)
+    span = max(5, max(abs(value) for value in value9 + value8) + 3)
+    ax.set_xlim(-span, span)
+    ax.legend(frameon=False, loc="lower right")
+    ax.invert_yaxis()
+    fig.tight_layout()
+    path = output_dir / "workload_metric_b.png"
+    fig.savefig(path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    return path
+
+
+def save_storage_plot(output_dir):
+    labels = ("LogG=10\n64K reference", "LogG=9\nhalf tagged entries", "LogG=8\nquarter tagged entries")
+    values = (574.5, 553.7, 543.3)
+    fig, ax = plt.subplots(figsize=(7.8, 3.3))
+    bars = ax.bar(list(range(3)), values, width=0.58)
+    ax.set_ylabel("Estimated combined storage (KiB)")
+    ax.set_ylim(0, 650)
+    ax.set_xticks(list(range(3)))
+    ax.set_xticklabels(labels, fontsize=8)
+    ax.grid(axis="y", alpha=0.3)
+    ax.set_axisbelow(True)
+    ax.bar_label(bars, labels=[f"{value:.1f}" for value in values], padding=3, fontsize=8)
+    fig.tight_layout()
+    path = output_dir / "storage_estimates.png"
+    fig.savefig(path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    return path
+
+
 def save_mean_csv(summary, output_dir):
     path = output_dir / "absolute_mpki_means.csv"
     with path.open("w", newline="", encoding="utf-8") as handle:
@@ -251,7 +332,10 @@ def main():
     summary = summarize(loaded)
     outputs = (
         save_absolute_plot(loaded, args.output_dir),
+        save_aggregate_plot(summary, args.output_dir),
         save_reduction_plot(summary, args.output_dir),
+        save_workload_metric_b_plot(loaded, args.output_dir),
+        save_storage_plot(args.output_dir),
         save_mean_csv(summary, args.output_dir),
     )
     for capacity in ("LogG10", "LogG9", "LogG8"):

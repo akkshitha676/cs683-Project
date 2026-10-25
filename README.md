@@ -111,7 +111,7 @@ Expected MD5 checksums are listed in [trace checksum list](results/checkpoint1/r
 
 The published integrity log records successful gzip-integrity checks for all 14 traces. Runner console logs record the completed simulator runs. Analysis validation checks paired instruction counts and MPKI calculations. See [trace integrity log](results/checkpoint1/full_trace_gzip_validation.log), [analysis validation record](results/checkpoint1/analysis_validation.txt), and [capacity results summary](results/checkpoint1/capacity_gate_report_summary.md).
 
-To regenerate the plots from the committed result CSV files, run `python3 scripts/plot_checkpoint1.py`. The script validates paired workload counts and produces `absolute_mpki_by_workload.png`, `normalized_reductions.png`, and `absolute_mpki_means.csv` under `results/checkpoint1/figures/`.
+To regenerate the plots from the committed result CSV files, run `python3 scripts/plot_checkpoint1.py`. The script validates paired workload counts and produces the absolute MPKI chart, aggregate and normalized reduction charts, per-workload Metric B chart, storage-estimate chart, and `absolute_mpki_means.csv` under `results/checkpoint1/figures/`. The storage chart uses the source-based estimates documented in this repository.
 
 The completed Checkpoint I results are provided for inspection. Runner scripts write fresh runs under results/checkpoint1/reruns/ and preserve published results. A rerun requires the original instruction traces, successful integrity validation, a build whose predictor binary matches the recorded checksum, and a clean tracked working tree. The capacity runner also checks that the validated source commit is an ancestor of the checked-out commit.
 
