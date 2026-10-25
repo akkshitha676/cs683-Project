@@ -2,7 +2,7 @@
 
 This research project builds on the public [LLBP-X artifact](https://github.com/dhschall/LLBP-X). It asks how much prediction accuracy LLBP-X recovers when the base predictor becomes smaller.
 
-The base predictor is Tagged Geometric History Length with Statistical Corrector and Loop predictor (TAGE-SC-L). LLBP-X extends the Last-Level Branch Predictor (LLBP) with dynamic context-depth adaptation. Mispredictions per thousand instructions (MPKI) measure prediction errors. Branch target buffer (BTB) simulation is enabled in every run. Instructions per cycle (IPC) and physical energy are not measured in this checkpoint.
+The base TAGE-SC-L predictor combines TAGE (Tagged Geometric History Length), a Statistical Corrector (SC), and a Loop predictor (L). LLBP-X extends the Last-Level Branch Predictor (LLBP) with dynamic context-depth adaptation. Mispredictions per thousand instructions (MPKI) measure prediction errors. Branch target buffer (BTB) simulation is enabled in every run. This checkpoint does not measure instructions per cycle (IPC), energy, or physical area.
 
 ## Research question
 
@@ -16,7 +16,7 @@ Two comparisons answer different questions. Metric A compares LLBP-X with standa
 - Evaluation over the artifact's 14 official server workloads.
 - Matched runs using 100 million warm-up instructions and 200 million measured instructions.
 - 84 total runs: 28 each at LogG=10, LogG=9, and LogG=8.
-- Result CSVs, per-run logs, trace-integrity records, provenance, and analysis scripts.
+- CSV result files, per-run logs, trace-integrity records, provenance, and analysis scripts.
 
 The capacity experiments use the accuracy-only configuration: timing simulation is disabled and optW=0. These experiments measure prediction accuracy. They do not measure cycle-accurate latency or full-system performance.
 
@@ -72,11 +72,11 @@ The runs use the same workload windows and BTB setting. They do not establish la
 
 ## Repository layout
 
-- bpmodels/: predictor implementations and model registrations.
-- scripts/: build, trace-download, evaluation, and analysis scripts.
-- results/checkpoint1/: result CSVs, per-workload metrics, integrity checks, and experiment logs.
-- docs/: experiment protocol, claims ledger, provenance, threshold mapping, and preserved upstream README.
-- traces/: precomputed LLBP-X context/pattern data. These are distinct from the large raw instruction-trace archives.
+- `bpmodels/`: predictor implementations and model registrations.
+- `scripts/`: build, trace-download, evaluation, and analysis scripts.
+- `results/checkpoint1/`: result CSV files, per-workload metrics, integrity checks, and experiment logs.
+- `docs/`: experiment protocol, claims ledger, provenance, threshold mapping, and preserved upstream documentation.
+- `traces/`: derived LLBP-X context/pattern data. These are distinct from the large raw instruction-trace archives.
 
 ## Presentation and recording materials
 
@@ -89,13 +89,13 @@ The editable PowerPoint and PDF export are supplied separately as checkpoint sub
 
 ## Reproducing the analysis
 
-Build and trace-download instructions for the upstream simulator are preserved in [docs/UPSTREAM_README.md](docs/UPSTREAM_README.md).
+Build and trace-download instructions for the upstream simulator are preserved in [upstream build and trace-download instructions](docs/UPSTREAM_README.md).
 
 The original large server instruction traces are not redistributed here. They are available from the upstream artifact at [Zenodo record 13133242](https://doi.org/10.5281/zenodo.13133242). The precomputed pattern CSVs in traces/ are separate files used by LLBP-X and are included in this repository.
 
-Expected MD5 checksums are listed in [required-traces.md5](results/checkpoint1/required-traces.md5). Trace downloads must pass checksum and gzip-integrity checks before evaluation.
+Expected MD5 checksums are listed in [trace checksum list](results/checkpoint1/required-traces.md5). Trace downloads must pass checksum and gzip-integrity checks before evaluation.
 
-The published integrity log records successful gzip-integrity checks for all 14 traces. Runner console logs record the completed simulator runs. Analysis validation checks paired instruction counts and MPKI calculations. See [full_trace_gzip_validation.log](results/checkpoint1/full_trace_gzip_validation.log), [analysis_validation.txt](results/checkpoint1/analysis_validation.txt), and [capacity_gate_report_summary.md](results/checkpoint1/capacity_gate_report_summary.md).
+The published integrity log records successful gzip-integrity checks for all 14 traces. Runner console logs record the completed simulator runs. Analysis validation checks paired instruction counts and MPKI calculations. See [trace integrity log](results/checkpoint1/full_trace_gzip_validation.log), [analysis validation record](results/checkpoint1/analysis_validation.txt), and [capacity results summary](results/checkpoint1/capacity_gate_report_summary.md).
 
 The completed Checkpoint I results are provided for inspection. Runner scripts write fresh runs under results/checkpoint1/reruns/ and preserve published results. A rerun requires the original instruction traces, successful integrity validation, a build whose predictor binary matches the recorded checksum, and a clean tracked working tree. The capacity runner also checks that the validated source commit is an ancestor of the checked-out commit.
 
@@ -113,4 +113,4 @@ Checkpoint II examines timing-aware behavior and refines the storage/latency ana
 
 The checkpoint validates a 14-workload, three-capacity accuracy study. LogG=9 gives the strongest observed balance: it halves tagged entries and beats full-size TAGE-SC-L on 13 of 14 workloads. LogG=8 shows that same-capacity gains can conceal losses against the full-size reference.
 
-Repository: [github.com/akkshitha676/cs683-Project](https://github.com/akkshitha676/cs683-Project). The study builds on the original [LLBP-X artifact](https://github.com/dhschall/LLBP-X); see its preserved README and license for original authorship, publication details, and reuse terms.
+Repository: [CS683 project repository](https://github.com/akkshitha676/cs683-Project). The study builds on the original [LLBP-X artifact](https://github.com/dhschall/LLBP-X); see its documentation and license for original authorship, publication details, and reuse terms.

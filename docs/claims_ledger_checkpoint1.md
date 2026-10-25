@@ -2,8 +2,8 @@
 
 ## Experimental provenance
 
-- Source commit: 5da415efc2ffd76d6944fcf2cb306742b882d961
-- Predictor SHA-256: d7aff66067b66480127dd1921361a2147f29d4ee1fe429cefc14c236d7926621
+- Source commit: `5da415efc2ffd76d6944fcf2cb306742b882d961`
+- Predictor SHA-256: `d7aff66067b66480127dd1921361a2147f29d4ee1fe429cefc14c236d7926621`
 - Workloads: 14 official evaluation traces
 - Trace checksums: all 14 passed
 - Gzip integrity: all 14 passed
