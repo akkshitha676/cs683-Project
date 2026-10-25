@@ -1,16 +1,14 @@
 # Checkpoint I — Capacity Evaluation Summary
 
-All percentages are recomputed from raw instruction and misprediction counts.
+Normalized comparisons use geometric means of per-workload MPKI ratios. Pooled reductions are computed separately from total error rates. Median values are descriptive summaries of workload variation.
 
 | Metric | 64K | LogG=9 | LogG=8 |
 |---|---:|---:|---:|
-| Arithmetic mean reduction (Metric A) | 12.60% | 20.60% | 29.62% |
-| Median per-workload reduction (Metric A) | 11.92% | 20.63% | 27.20% |
 | Geometric-mean ratio reduction (Metric A) | 12.92% | 21.37% | 32.34% |
+| Median per-workload reduction (Metric A, descriptive) | 11.92% | 20.63% | 27.20% |
 | Pooled reduction (Metric A) | 13.41% | 19.98% | 27.82% |
-| Arithmetic mean reduction (Metric B) | 12.60% | 6.99% | 0.81% |
-| Median per-workload reduction (Metric B) | 11.92% | 4.54% | -0.53% |
 | Geometric-mean ratio reduction (Metric B) | 12.92% | 7.22% | 1.09% |
+| Median per-workload reduction (Metric B, descriptive) | 11.92% | 4.54% | -0.53% |
 | Pooled reduction (Metric B) | 13.41% | 8.22% | 2.85% |
 
 ## Workload wins against the reference

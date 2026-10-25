@@ -1,12 +1,11 @@
 # Reduced-Capacity Evaluation Summary
 
-All metrics were recomputed from raw misprediction and instruction counts.
+Normalized comparisons use geometric means of per-workload MPKI ratios. Pooled reductions use total mispredictions divided by total measured instructions.
 
 | Metric | 64K | LogG=9 | LogG=8 |
 |---|---:|---:|---:|
-| Arithmetic mean per-workload reduction | 12.60% | 20.60% | 29.62% |
 | Geometric-mean ratio reduction | 12.92% | 21.37% | 32.34% |
-| Median per-workload reduction | 11.92% | 20.63% | 27.20% |
+| Median per-workload reduction (descriptive) | 11.92% | 20.63% | 27.20% |
 | Pooled reduction (ratio of total error rates) | 13.41% | 19.98% | 27.82% |
 | Workloads improved vs chosen reference | 14/14 | 14/14 | 14/14 |
 | Minimum per-workload reduction | 2.00% | 7.10% | 10.79% |

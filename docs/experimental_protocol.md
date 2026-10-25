@@ -80,3 +80,8 @@ energy, IPC, or full-pipeline performance.
 
 Do not modify the analysis rules after results arrive without
 documenting the reason and preserving the original protocol.
+
+
+## Reporting clarification (2026-10-25)
+
+The preregistered text above requests arithmetic means of per-workload percentage reductions as well as geometric-mean sensitivity checks. The written Checkpoint I summary follows the course reporting guidance instead: it uses geometric means for normalized MPKI-ratio comparisons and reports pooled reduction separately from total error rates. Arithmetic means of per-workload percentage ratios are not used as headline results. This clarification changes presentation of the results, not the run configurations, raw counts, or metric definitions. The original protocol remains in the repository history for traceability.

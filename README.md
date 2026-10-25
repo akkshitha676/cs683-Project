@@ -36,7 +36,7 @@ LLBP-X improves over the same-capacity standalone baseline on all 14 workloads a
 
 **Main insight:** a large improvement over a smaller baseline does not prove that the design beats the full-size baseline. LogG=9 gives the more consistent result. LogG=8 is workload-dependent.
 
-The full-size standalone TAGE-SC-L MPKI values match the paper's Table I to two decimal places, according to the project's independent result review. The paper reports approximately 12.1% average improvement for standard LLBP-X in §VII-A. Its aggregation convention is not explicit in that discussion. The current result is close numerical agreement, not an exact reproduction.
+The full-size standalone TAGE-SC-L MPKI values match the paper's Table I to two decimal places, according to the project's independent result review. The primary reference is David Schall, Mária Ďuračková, and Boris Grot, [“The Last-Level Branch Predictor Revisited” (HPCA 2026)](https://2026.hpca-conf.org/details/hpca-2026-main-conference/7/The-Last-Level-Branch-Predictor-Revisited). The paper reports approximately 12.1% average improvement for standard LLBP-X in §VII-A. Its aggregation convention is not explicit in that discussion. The current result is close numerical agreement, not an exact reproduction.
 
 ## Metric definitions
 
@@ -58,7 +58,7 @@ Metric B = 100 × (T_64 − X_s) / T_64
 
 This measures whether reduced-capacity LLBP-X beats the original full-size baseline. At 64K, the metrics coincide. At smaller capacities, they answer different questions.
 
-Geometric-mean ratio reduction, arithmetic mean of per-workload percentages, and pooled reduction are distinct summaries. Every reported value identifies its aggregation method.
+The geometric mean summarizes normalized per-workload MPKI ratios. Pooled reduction is computed separately from total mispredictions and total measured instructions. The report does not use an arithmetic mean of per-workload percentage ratios.
 
 ## Experimental configurations
 

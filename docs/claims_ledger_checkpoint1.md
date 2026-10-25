@@ -33,7 +33,6 @@ Evidence in this repository:
 Status: VERIFIED, WITH COMPARABILITY CAVEATS
 
 - 28/28 runs completed across 14 workloads.
-- Arithmetic mean of per-workload percentage reductions: 12.60%.
 - Geometric-mean ratio reduction: 12.92%.
 - Pooled misprediction reduction: 13.41%.
 - Median per-workload reduction: 11.92%.
@@ -52,11 +51,9 @@ Status: VERIFIED, INTERPRETATION SUPPORTED
 
 - 28/28 runs completed.
 - Metric A: same-capacity LLBP-X improvement over standalone TAGE.
-  - Arithmetic mean: 20.60%.
   - Pooled reduction: 19.98%.
   - LLBP-X improves on the same-capacity baseline on 14/14 workloads.
 - Metric B: reduced-capacity LLBP-X compared with the fixed full-size 64K TAGE baseline.
-  - Arithmetic mean: 6.99%.
   - Pooled reduction: 8.22%.
   - LLBP-X beats full-size TAGE on 13/14 workloads.
 
@@ -72,16 +69,14 @@ Status: VERIFIED, WORKLOAD-DEPENDENT
 
 - 28/28 runs completed.
 - Metric A:
-  - Arithmetic mean: 29.62%.
   - Pooled reduction: 27.82%.
   - LLBP-X improves on the same-capacity baseline on 14/14 workloads.
 - Metric B:
-  - Arithmetic mean: 0.81%.
   - Pooled reduction: 2.85%.
   - LLBP-X beats full-size TAGE on 6/14 workloads.
   - Median Metric B: -0.53%.
 
-Interpretation: the same-capacity improvement is large, but much of it is spent recovering the accuracy lost by shrinking the base TAGE predictor. The result is workload-dependent. Do not headline the 0.81% arithmetic mean without the per-workload distribution.
+Interpretation: the same-capacity improvement is large, but much of it is spent recovering the accuracy lost by shrinking the base TAGE predictor. The result is workload-dependent because Metric B beats full-size TAGE on only 6 of 14 workloads.
 
 Evidence:
 - [LogG=8 result CSV](../results/checkpoint1/results_logg8.csv)
