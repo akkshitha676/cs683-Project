@@ -1,6 +1,6 @@
 # Checkpoint I presentation materials
 
-This directory versions the five-minute narration script and its presentation notes. The editable PowerPoint deck and PDF export are supplied separately as checkpoint submission files; they are not committed as binary assets in this repository revision.
+This directory contains presentation notes. The five-minute speaker script, editable PowerPoint deck, and PDF export are supplied separately as submission files and are not committed to this repository.
 
 The deck is aligned with the published result files in results/checkpoint1/: 14 workloads, 3 capacity points, and 84 accuracy-only simulator runs (100M warm-up and 200M measurement instructions per run, with BTB simulation enabled). The primary normalized statistic is the geometric-mean MPKI-ratio reduction; pooled reductions are reported separately.
 
