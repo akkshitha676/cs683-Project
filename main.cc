@@ -22,7 +22,7 @@
  *
  * Main file to simulate the LLBP branch predictor model.
  *
- * This framework aims to provide a fast and way to evaluate different branch
+ * This framework aims to provide a fast way to evaluate different branch
  * predictor configurations and explore the design space of LLBP.
  * It does not model the full pipeline but only the branch predictor. While
  * we approximate the timing impact of late prefetches by clocking the
@@ -171,7 +171,7 @@ bool process_command_line(int argc, char** argv)
           ("maxbrinst,m",  po::value<uint64_t>(&max_br_instruction)->default_value(dMAX), "max number of branches to simulate")
           ("inst-sim,n",   po::value<uint64_t>(&sim_instructions)->default_value(DEF_SIM), "max number of instructions to simulate")
           ("inst-warm,w",  po::value<uint64_t>(&warmup_instructions)->default_value(DEF_WARMUP), "number to instructions to warmup")
-          ("access-delay", po::value<int>(&access_delay)->default_value(4), "LLBP-X pattern-prefetch access delay in cycles")
+          ("access-delay", po::value<int>(&access_delay)->default_value(4), "Approximate LLBP-X pattern-prefetch delay in simulator ticks")
         ;
 
         po::positional_options_description p;
