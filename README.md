@@ -36,7 +36,7 @@ LLBP-X improves over the same-capacity standalone baseline on all 14 workloads a
 
 **Main insight:** a large improvement over a smaller baseline does not prove that the design beats the full-size baseline. LogG=9 gives the more consistent result. LogG=8 is workload-dependent.
 
-The full-size standalone TAGE-SC-L MPKI values match the paper's Table I to two decimal places, according to the project's independent result review. The primary reference is David Schall, Mária Ďuračková, and Boris Grot, [“The Last-Level Branch Predictor Revisited” (HPCA 2026)](https://2026.hpca-conf.org/details/hpca-2026-main-conference/7/The-Last-Level-Branch-Predictor-Revisited). The paper reports approximately 12.1% average improvement for standard LLBP-X in §VII-A. Its aggregation convention is not explicit in that discussion. The current result is close numerical agreement, not an exact reproduction.
+The full-size standalone TAGE-SC-L MPKI values match the paper's Table I to two decimal places, according to the project's independent result review. The primary paper is [“The Last-Level Branch Predictor Revisited” (HPCA 2026)](https://2026.hpca-conf.org/details/hpca-2026-main-conference/7/The-Last-Level-Branch-Predictor-Revisited). The paper reports approximately 12.1% average improvement for standard LLBP-X in §VII-A. Its aggregation convention is not explicit in that discussion. The current result is close numerical agreement, not an exact reproduction.
 
 ## Metric definitions
 

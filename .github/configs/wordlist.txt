@@ -120,4 +120,3 @@ kibibytes
 reproducibility
 scons
 SHA
-Ďuračková
