@@ -1,7 +1,5 @@
 
 #pragma once
-// #ifndef __BASE_PREDICTOR__
-// #define __BASE_PREDICTOR__
 
 #include "utils/common.h"
 

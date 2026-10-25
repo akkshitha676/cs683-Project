@@ -33,7 +33,6 @@ namespace LLBP {
 
 
 #define PRINTDEBUG 0
-// #define COND (stats.total > 3000000)
 #define COND (false)
 #define COND2 (false)
 
@@ -121,7 +120,6 @@ LLBPX::LLBPX(LLBPXConfig cfg)
     // empirically determined. Note this
     // are not the actual length but the table indices in TAGE.
     auto l = {6,10,13,14,15,16,17,18,  19,20,22,24,26,28,32,36};
-    // auto l = {2,6,10,13,14,15,17,18,  19,20,22,24,26,28,32,36};
 
     int n = 0;
     for (auto i : l) {
@@ -396,7 +394,6 @@ void LLBPX::updateTables(uint64_t pc, bool resolveDir, bool predDir) {
                 stats.totalAllocInit, stats.total, HitBank, llbp.hit, llbp.shorter, llbp.isProvider, llbp.pred);
     }
 
-    // nallocated = 0;
     allocateTables(nalloc, pc, resolveDir);
     HitBank = tmp2;
 
@@ -463,7 +460,6 @@ void LLBPX::llbpPredict(uint64_t pc) {
         // | Table | History Hash | PC |
 
         hash |= gtag(pc,i);
-        // uint64_t ls = 20;
         hash ^= gindex(pc,i) << (TTWidth - logg[i] - 1);
 
         hash &= ((1 << TTWidth) - 1);
@@ -866,7 +862,6 @@ int LLBPX::allocate(int Tidx, uint64_t pc, bool taken) {
     // Get the newly allocated entry and mark with the context and key
     if (alloc_res > 0) {
         auto& entry = gtable[Tidx][GI[Tidx]];
-        // entry.ctx = rcr.getCCID(pc);
         entry.ctx = rcr.getCCID();
         entry.key = KEY[Tidx];
         DPRINTIF(COND,"L1Alloc:%i,GI:%i,T:%i,K:%#x,C:%#x\n", Tidx, GI[Tidx], entry.tag, entry.key, entry.ctx);
