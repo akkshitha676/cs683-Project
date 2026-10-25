@@ -38,7 +38,7 @@ Status: VERIFIED, WITH COMPARABILITY CAVEATS
 - Median per-workload reduction: 11.92%.
 - Per-workload range: 2.00% to 28.47%.
 
-The paper reports an average of approximately 12.1%, with a range of 1.4% to 27% in §VII-A. Its averaging convention is not explicit in that discussion. The results are close, but are not an exact reproduction. The run uses the accuracy-only, zero-latency LLBP-X model.
+The paper reports approximately 12.1% improvement for standard LLBP-X in §VII-A. The upstream analysis notebook labels the timing-enabled `llbpx-timing-ae` series as `LLBP-X` and the zero-latency `llbpx-ae` series as `LLBP-X-0Lat`. These results use `llbpx` with `simulateTiming=0`, so they are not a direct reproduction of the timing-enabled paper result. A matched timing-enabled comparison is a next-step experiment.
 
 Evidence:
 - [64K result CSV](../results/checkpoint1/results_64k.csv)
@@ -126,7 +126,7 @@ These are source-based estimates, not measured silicon area, energy, IPC, or cyc
 - The capacity experiments use the accuracy-only zero-latency model.
 - One 200M-instruction measurement window is used per trace and configuration.
 - Timing, energy, IPC, and physical implementation benefits are not established.
-- Paper/artifact aggregation and finite-latency parity require cautious wording.
+- The timing-enabled paper result is not directly comparable to this accuracy-only, zero-latency run.
 - The paper's Figure 16b caption/text ambiguity remains unresolved.
 - The older three-trace pilot CSV is exploratory and is not a headline result.
 - The study does not claim exact reproduction of the paper or iso-storage superiority.

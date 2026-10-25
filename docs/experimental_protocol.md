@@ -85,3 +85,8 @@ documenting the reason and preserving the original protocol.
 ## Reporting clarification (2026-10-25)
 
 The preregistered text above requests arithmetic means of per-workload percentage reductions as well as geometric-mean sensitivity checks. The written Checkpoint I summary follows the course reporting guidance instead: it uses geometric means for normalized MPKI-ratio comparisons and reports pooled reduction separately from total error rates. Arithmetic means of per-workload percentage ratios are not used as headline results. This clarification changes presentation of the results, not the run configurations, raw counts, or metric definitions. The original protocol remains in the repository history for traceability.
+
+
+## Reporting clarification (2026-10-26)
+
+The published capacity results use `llbpx` with `simulateTiming=0` and `optW=0`. The upstream notebook labels `llbpx-timing-ae` as timing-enabled `LLBP-X` and `llbpx-ae` as `LLBP-X-0Lat`. Because the current study reports the zero-latency model, its 12.92% geometric-mean and 13.41% pooled reductions are not a direct reproduction of the paper's approximately 12.1% timing-enabled result. A matched timing-enabled comparison remains future work.
