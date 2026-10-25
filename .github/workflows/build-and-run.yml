@@ -40,7 +40,7 @@ jobs:
       if: ${{ matrix.os == 'ubuntu-latest' }}
       with:
         path: build
-        key: ${{ matrix.os }}-${{ matrix.c_compiler }}-build
+        key: ${{ github.repository }}-${{ matrix.os }}-${{ matrix.c_compiler }}-build
 
     - name: Install Dependencies
       run: |
@@ -89,7 +89,7 @@ jobs:
       uses: actions/cache/restore@v4
       with:
         path: build
-        key: ${{ matrix.os }}-gcc-build
+        key: ${{ github.repository }}-${{ matrix.os }}-gcc-build
 
     - name: Install Dependencies
       run: |
