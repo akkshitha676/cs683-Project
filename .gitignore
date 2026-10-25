@@ -32,3 +32,6 @@ llbpx_reduced_tage_trace.log
 llbpx_timing_trace.log
 __pycache__/
 *.py[cod]
+
+# Keep fresh local reruns out of the published Checkpoint I evidence.
+/results/checkpoint1/reruns/
