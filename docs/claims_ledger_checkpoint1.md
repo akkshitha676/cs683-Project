@@ -1,4 +1,4 @@
-# LLBP-X Checkpoint I — Claims Ledger
+# LLBP-X Checkpoint I : Claims Ledger
 
 ## Experimental provenance
 
@@ -11,11 +11,11 @@
 - BTB simulation: enabled
 - Model for reported LLBP-X accuracy results: llbpx (simulateTiming=0, optW=0)
 
-## Claim 1 — Full-size baseline reproducibility
+## Claim 1 : Full-size baseline reproducibility
 
 Status: VERIFIED
 
-All 14 standalone TAGE-SC-L baseline MPKIs match the paper's Table I to two decimal places, according to the independent review.
+A direct workload-by-workload comparison of the 14 recorded standalone TAGE-SC-L baseline MPKIs with Table I shows a match to two decimal places for every workload.
 
 PHPWiki exact check:
 - ROI instructions: 199,999,983
@@ -28,7 +28,7 @@ Evidence in this repository:
 - [64K provenance record](provenance_64k.txt)
 - PHPWiki per-run evidence: [mwnginxfpm-wiki_llbpx.log](../results/checkpoint1/logs/64k_gate/mwnginxfpm-wiki_llbpx.log)
 
-## Claim 2 — Full-size LLBP-X accuracy improvement
+## Claim 2 : Full-size LLBP-X accuracy improvement
 
 Status: VERIFIED, WITH COMPARABILITY CAVEATS
 
@@ -45,7 +45,7 @@ Evidence:
 - [64K runner console log](../results/checkpoint1/logs/runner_console_64k.log)
 - Per-workload logs are in results/checkpoint1/logs/64k_gate/ in the repository.
 
-## Claim 3 — LogG=9 reduced-capacity result
+## Claim 3 : LogG=9 reduced-capacity result
 
 Status: VERIFIED, INTERPRETATION SUPPORTED
 
@@ -63,7 +63,7 @@ Evidence:
 - [Capacity runner console log](../results/checkpoint1/logs/runner_console_capacity.log)
 - Per-run logs are in results/checkpoint1/logs/capacity_gate/ in the repository.
 
-## Claim 4 — LogG=8 reduced-capacity result
+## Claim 4 : LogG=8 reduced-capacity result
 
 Status: VERIFIED, WORKLOAD-DEPENDENT
 
@@ -84,7 +84,7 @@ Evidence:
 - [Capacity runner console log](../results/checkpoint1/logs/runner_console_capacity.log)
 - Per-run logs are in results/checkpoint1/logs/capacity_gate/ in the repository.
 
-## Claim 5 — History threshold and Opt-W configuration
+## Claim 5 : History threshold and Opt-W configuration
 
 Status: RUNTIME CONFIGURATION VERIFIED
 
@@ -107,7 +107,7 @@ Evidence:
 - [Threshold mapping verification](threshold_mapping_verification.txt)
 - [PHPWiki LLBP-X run log](../results/checkpoint1/logs/64k_gate/mwnginxfpm-wiki_llbpx.log)
 
-## Claim 6 — Storage trade-off
+## Claim 6 : Storage trade-off
 
 Status: ESTIMATE, NOT A PHYSICAL MEASUREMENT
 

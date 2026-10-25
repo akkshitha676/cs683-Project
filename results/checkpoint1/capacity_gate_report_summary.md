@@ -1,4 +1,4 @@
-# Checkpoint I — Capacity Evaluation Summary
+# Checkpoint I : Capacity Evaluation Summary
 
 Normalized comparisons use geometric means of per-workload MPKI ratios. Pooled reductions are computed separately from total error rates. Median values are descriptive summaries of workload variation.
 
@@ -25,3 +25,13 @@ Normalized comparisons use geometric means of per-workload MPKI ratios. Pooled r
 - Pooled reduction is computed from the ratio of total error rates.
 - At 64K, Metrics A and B coincide.
 - These are accuracy-only, zero-latency results; they do not establish timing, energy, or IPC benefit.
+
+## Absolute MPKI means
+
+Arithmetic mean workload MPKI, computed from the raw misprediction and instruction counts:
+
+| Capacity | Standalone TAGE-SC-L | LLBP-X |
+|---|---:|---:|
+| Full size, LogG=10 | 2.916 | 2.525 |
+| LogG=9 | 3.345 | 2.677 |
+| LogG=8 | 3.925 | 2.833 |

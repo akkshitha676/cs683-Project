@@ -1,4 +1,4 @@
-# CS683 Checkpoint I — Preregistered Analysis Protocol
+# CS683 Checkpoint I : Preregistered Analysis Protocol
 Date: 2026-10-24
 
 ## Experiment scope

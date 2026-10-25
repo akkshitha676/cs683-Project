@@ -1,4 +1,4 @@
-# LLBP-X Capacity-Sensitivity Study — CS683 Project
+# LLBP-X Capacity-Sensitivity Study: CS683 Project
 
 This research project builds on the public [LLBP-X artifact](https://github.com/dhschall/LLBP-X). It asks how much prediction accuracy LLBP-X recovers when the base predictor becomes smaller.
 
@@ -36,7 +36,17 @@ LLBP-X improves over the same-capacity standalone baseline on all 14 workloads a
 
 **Main insight:** a large improvement over a smaller baseline does not prove that the design beats the full-size baseline. LogG=9 gives the more consistent result. LogG=8 is workload-dependent.
 
-The full-size standalone TAGE-SC-L MPKI values match the paper's Table I to two decimal places, according to the project's independent result review. The primary paper is [“The Last-Level Branch Predictor Revisited” (HPCA 2026)](https://2026.hpca-conf.org/details/hpca-2026-main-conference/7/The-Last-Level-Branch-Predictor-Revisited). The paper reports approximately 12.1% average improvement for standard LLBP-X in §VII-A. Its aggregation convention is not explicit in that discussion. The current result is close numerical agreement, not an exact reproduction.
+The 14 recorded full-size standalone TAGE-SC-L MPKIs were compared workload by workload with Table I and match to two decimal places. The primary paper is [“The Last-Level Branch Predictor Revisited” (HPCA 2026)](https://2026.hpca-conf.org/details/hpca-2026-main-conference/7/The-Last-Level-Branch-Predictor-Revisited). The upstream analysis notebook (`analysis/mpki.ipynb`) labels `llbpx-timing-ae` as `LLBP-X` and `llbpx-ae` as `LLBP-X-0Lat`. Its `Mean` bar reports the reduction calculated from mean MPKI values. This project reports the accuracy-only `llbpx` model with `simulateTiming=0`, using geometric-mean MPKI-ratio reduction and a separately computed pooled reduction. The 12.92% and 13.41% values therefore are not a direct reproduction of the paper's approximately 12.1% result. A matched timing-enabled comparison is a next-step experiment.
+
+## Absolute MPKI
+
+The table below reports the arithmetic mean of the 14 workload MPKIs, recomputed from raw misprediction and instruction counts. These absolute MPKI means are separate from the normalized geometric-mean ratios and the pooled reduction reported above.
+
+| Capacity | Standalone TAGE-SC-L mean MPKI | LLBP-X mean MPKI |
+|---|---:|---:|
+| Full size, LogG=10 | 2.916 | 2.525 |
+| LogG=9 | 3.345 | 2.677 |
+| LogG=8 | 3.925 | 2.833 |
 
 ## Metric definitions
 
@@ -46,13 +56,13 @@ For each workload:
 - X_s is LLBP-X MPKI at that same capacity.
 - T_64 is full-size 64K standalone TAGE-SC-L MPKI.
 
-**Metric A — same-capacity improvement**
+**Metric A : same-capacity improvement**
 
 Metric A = 100 × (T_s − X_s) / T_s
 
 This measures LLBP-X's gain over standalone TAGE-SC-L at the same capacity.
 
-**Metric B — full-size reference comparison**
+**Metric B : full-size reference comparison**
 
 Metric B = 100 × (T_64 − X_s) / T_64
 
@@ -70,13 +80,17 @@ The geometric mean summarizes normalized per-workload MPKI ratios. Pooled reduct
 
 The runs use the same workload windows and BTB setting. They do not establish latency, IPC, energy, or physical implementation benefits.
 
+## Changes relative to upstream
+
+The study-specific implementation, experiment runners, validation, and reporting changes are listed in [the changes guide](docs/changes_relative_to_upstream.md). The underlying LLBP-X artifact remains attributed to its original repository and paper.
+
 ## Repository layout
 
 - `bpmodels/`: predictor implementations and model registrations.
 - `scripts/`: build, trace-download, evaluation, and analysis scripts.
 - `results/checkpoint1/`: result CSV files, per-workload metrics, integrity checks, and experiment logs.
 - `docs/`: experiment protocol, claims ledger, provenance, threshold mapping, and preserved upstream documentation.
-- `traces/`: derived LLBP-X context/pattern data. These are distinct from the large raw instruction-trace archives.
+- `traces/`: precomputed context/pattern CSV files used by the separate `llbpx-optw` variant with `--tableload`. The reported `llbpx` runs use `optW=0` and do not consume these files.
 
 ## Presentation and recording materials
 
