@@ -45,7 +45,6 @@ def summary(ref_rows, test_rows):
         1 - math.exp(mean(math.log(x / r) for r, x in zip(rr, xr)))
     )
     return {
-        "mean": mean(per),
         "median": median(per),
         "geometric": geometric,
         "pooled": pooled(ref_rows, test_rows),
@@ -101,43 +100,75 @@ metrics = {
 
 for label, m in metrics.items():
     print(
-        f"{label:8s} mean={m['mean']:.2f}% "
-        f"median={m['median']:.2f}% geometric={m['geometric']:.2f}% "
-        f"pooled={m['pooled']:.2f}% wins={m['wins']}/14"
+        f"{label:8s} median={m['median']:.2f}% "
+        f"geometric={m['geometric']:.2f}% pooled={m['pooled']:.2f}% "
+        f"wins={m['wins']}/14"
     )
 
+def mean_mpki(rows):
+    return mean(
+        1000 * int(row["roi_mispredictions"]) / int(row["roi_instructions"])
+        for row in rows
+    )
+
+mean_mpkis = {
+    "64K": (mean_mpki(full_t), mean_mpki(full_x)),
+    "LogG9": (
+        mean_mpki(capacity["LogG9"]["base"]),
+        mean_mpki(capacity["LogG9"]["x"]),
+    ),
+    "LogG8": (
+        mean_mpki(capacity["LogG8"]["base"]),
+        mean_mpki(capacity["LogG8"]["x"]),
+    ),
+}
+
 out = CAP / "capacity_gate_report_summary.md"
-with out.open("w") as f:
-    f.write("# Checkpoint I — Capacity Evaluation Summary\n\n")
-    f.write("All percentages are recomputed from raw instruction and misprediction counts.\n\n")
-    f.write("| Metric | 64K | LogG=9 | LogG=8 |\n")
-    f.write("|---|---:|---:|---:|\n")
-    for label, key, fmt in [
-        ("Arithmetic mean reduction (Metric A)", "mean", "{:.2f}%"),
-        ("Median per-workload reduction (Metric A)", "median", "{:.2f}%"),
-        ("Geometric-mean ratio reduction (Metric A)", "geometric", "{:.2f}%"),
-        ("Pooled reduction (Metric A)", "pooled", "{:.2f}%"),
-        ("Arithmetic mean reduction (Metric B)", "mean", "{:.2f}%"),
-        ("Median per-workload reduction (Metric B)", "median", "{:.2f}%"),
-        ("Geometric-mean ratio reduction (Metric B)", "geometric", "{:.2f}%"),
-        ("Pooled reduction (Metric B)", "pooled", "{:.2f}%"),
-    ]:
-        # At 64K, A and B coincide.
-        a = metrics["64K"][key]
-        b = metrics["LogG9_A"][key] if "Metric A" in label else metrics["LogG9_B"][key]
-        c = metrics["LogG8_A"][key] if "Metric A" in label else metrics["LogG8_B"][key]
-        f.write(f"| {label} | {fmt.format(a)} | {fmt.format(b)} | {fmt.format(c)} |\n")
+with out.open("w", encoding="utf-8") as f:
+    f.write("# Checkpoint I: Capacity Evaluation Summary\n\n")
+    f.write(
+        "Normalized comparisons use geometric means of per-workload MPKI ratios. "
+        "Pooled reductions use total mispredictions and total measured instructions.\n\n"
+    )
+    f.write("| Metric | 64K | LogG=9 | LogG=8 |\n|---|---:|---:|---:|\n")
+    rows = [
+        ("Geometric-mean MPKI-ratio reduction (Metric A)", "geometric"),
+        ("Median per-workload reduction (Metric A, descriptive)", "median"),
+        ("Pooled reduction (Metric A)", "pooled"),
+        ("Geometric-mean MPKI-ratio reduction (Metric B)", "geometric"),
+        ("Median per-workload reduction (Metric B, descriptive)", "median"),
+        ("Pooled reduction (Metric B)", "pooled"),
+    ]
+    for index, (label, key) in enumerate(rows):
+        if index < 3:
+            vals = (metrics["64K"][key], metrics["LogG9_A"][key], metrics["LogG8_A"][key])
+        else:
+            vals = (metrics["64K"][key], metrics["LogG9_B"][key], metrics["LogG8_B"][key])
+        f.write(f"| {label} | {vals[0]:.2f}% | {vals[1]:.2f}% | {vals[2]:.2f}% |\n")
+
+    f.write("\n## Absolute MPKI means\n\n")
+    f.write("Arithmetic mean workload MPKI, recomputed from raw instruction and misprediction counts.\n\n")
+    f.write("| Capacity | Standalone TAGE-SC-L | LLBP-X |\n|---|---:|---:|\n")
+    for name, label in (("64K", "Full size, LogG=10"), ("LogG9", "LogG=9"), ("LogG8", "LogG=8")):
+        base, llbpx = mean_mpkis[name]
+        f.write(f"| {label} | {base:.3f} | {llbpx:.3f} |\n")
 
     f.write("\n## Workload wins against the reference\n\n")
     f.write("| Reference | LogG=9 | LogG=8 |\n|---|---:|---:|\n")
-    f.write(f"| Same-capacity TAGE (Metric A) | {metrics['LogG9_A']['wins']}/14 | {metrics['LogG8_A']['wins']}/14 |\n")
-    f.write(f"| Full-size 64K TAGE (Metric B) | {metrics['LogG9_B']['wins']}/14 | {metrics['LogG8_B']['wins']}/14 |\n")
+    f.write(
+        f"| Same-capacity TAGE (Metric A) | {metrics['LogG9_A']['wins']}/14 | "
+        f"{metrics['LogG8_A']['wins']}/14 |\n"
+    )
+    f.write(
+        f"| Full-size 64K TAGE (Metric B) | {metrics['LogG9_B']['wins']}/14 | "
+        f"{metrics['LogG8_B']['wins']}/14 |\n"
+    )
 
-    f.write("\n## Definitions\n\n")
+    f.write("\n## Definitions and limits\n\n")
     f.write("- Metric A compares LLBP-X with standalone TAGE at the same capacity.\n")
     f.write("- Metric B compares reduced-capacity LLBP-X with full-size 64K standalone TAGE.\n")
-    f.write("- Pooled reduction is computed from the ratio of total error rates.\n")
     f.write("- At 64K, Metrics A and B coincide.\n")
-    f.write("- These are accuracy-only, zero-latency results; they do not establish timing, energy, or IPC benefit.\n")
+    f.write("- Results use the accuracy-only zero-latency configuration.\n")
+    f.write("- These results do not establish timing, energy, IPC, or physical-area benefits.\n")
 
 print(f"\nSaved report summary: {out}")
