@@ -24,6 +24,8 @@ PHPWiki exact check:
 
 Evidence in this repository:
 - [64K result CSV](../results/checkpoint1/results_64k.csv)
+- [14-row Table I baseline comparison](../results/checkpoint1/table1_baseline_comparison.csv)
+- [comparison script](../scripts/compare_table1_baseline.py)
 - [64K runner console log](../results/checkpoint1/logs/runner_console_64k.log)
 - [64K provenance record](provenance_64k.txt)
 - PHPWiki per-run evidence: [mwnginxfpm-wiki_llbpx.log](../results/checkpoint1/logs/64k_gate/mwnginxfpm-wiki_llbpx.log)
