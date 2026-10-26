@@ -12,11 +12,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Check plotting script syntax
-      run: python3 -m py_compile scripts/plot_checkpoint1.py
+      run: python3 -m py_compile scripts/plot_checkpoint1.py scripts/compare_table1_baseline.py
     - name: Install plotting dependency
       run: python3 -m pip install matplotlib
     - name: Regenerate plots from stored results
       run: python3 scripts/plot_checkpoint1.py --output-dir /tmp/checkpoint1-figures
+    - name: Verify Table I baseline MPKIs
+      run: python3 scripts/compare_table1_baseline.py
     - name: Regenerate capacity summary
       run: python3 scripts/summarize_checkpoint1.py
     - uses: rojopolis/spellcheck-github-actions@0.40.0
