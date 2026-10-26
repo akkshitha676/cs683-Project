@@ -29,6 +29,7 @@ set -e
 
 
 
+## Parse the TRACES.list file
 ## TRACES can be commented out with '#'
 TRACES=""
 
