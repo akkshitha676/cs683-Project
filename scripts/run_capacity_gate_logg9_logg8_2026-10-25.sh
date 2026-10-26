@@ -33,8 +33,16 @@ fi
 
 ACTUAL_BIN=$(sha256sum "$ROOT/build/predictor" | awk '{print $1}')
 if [[ "$ACTUAL_BIN" != "$EXPECTED_BIN" ]]; then
-    echo "ERROR: predictor binary checksum mismatch."
-    exit 1
+    if [[ "${ALLOW_UNVERIFIED_BUILD:-0}" == "1" ]]; then
+        echo "WARNING: binary differs from the archived checkpoint build."
+        echo "This is a fresh-build rerun, not a byte-identical reproduction."
+    else
+        echo "ERROR: predictor binary checksum mismatch."
+        echo "Set ALLOW_UNVERIFIED_BUILD=1 only for an explicitly labelled fresh-build rerun."
+        exit 1
+    fi
+else
+    echo "PASS: archived predictor binary checksum matches."
 fi
 
 grep -qx 'ALL 14 GZIP INTEGRITY CHECKS PASSED' \
