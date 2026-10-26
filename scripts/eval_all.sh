@@ -71,6 +71,7 @@ N_SIM=$(( 200 * $d1M ))
 
 FLAGS=""
 FLAGS="${FLAGS} --simulate-btb"
+# FLAGS="${FLAGS} --tabledump"
 
 
 BRMODELS=""
