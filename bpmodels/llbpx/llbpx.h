@@ -30,6 +30,8 @@
 #include <vector>
 #include <unordered_map>
 #include <list>
+
+// #include "utils/fileutils.h"
 #include <queue>
 
 
@@ -593,11 +595,13 @@ struct LLBPXConfig {
 
 
     int adaptThreshold = 7;
+    // int histLenThreshold = 17;
     int histLenThreshold = 22;
 
     int CitSize =  6*1024;
     int CitAssoc = 6;
 
+    // int BCTWidth = 31;
     int BCTWidth = 16;
 
     bool simulateTiming = false;
