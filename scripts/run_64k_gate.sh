@@ -9,10 +9,26 @@ CSV="$RUN_DIR/results.csv"
 cd "$ROOT"
 mkdir -p "$RUN_DIR/logs"
 
-echo "Checking predictor binary..."
-printf '%s  ./build/predictor\n' \
-  'd7aff66067b66480127dd1921361a2147f29d4ee1fe429cefc14c236d7926621' \
-  | sha256sum -c -
+EXPECTED_BIN='d7aff66067b66480127dd1921361a2147f29d4ee1fe429cefc14c236d7926621'
+ACTUAL_BIN=$(sha256sum "$ROOT/build/predictor" | awk '{print $1}')
+if [[ "$ACTUAL_BIN" != "$EXPECTED_BIN" ]]; then
+    if [[ "${ALLOW_UNVERIFIED_BUILD:-0}" == "1" ]]; then
+        echo "WARNING: binary differs from the archived checkpoint build."
+        echo "This is a fresh-build rerun, not a byte-identical reproduction."
+    else
+        echo "ERROR: predictor binary checksum mismatch."
+        echo "Set ALLOW_UNVERIFIED_BUILD=1 only for an explicitly labelled fresh-build rerun."
+        exit 1
+    fi
+else
+    echo "PASS: archived predictor binary checksum matches."
+fi
+{
+    echo "Run started: $(date -Is)"
+    echo "Expected checkpoint binary SHA-256: $EXPECTED_BIN"
+    echo "Actual predictor binary SHA-256: $ACTUAL_BIN"
+    echo "ALLOW_UNVERIFIED_BUILD: ${ALLOW_UNVERIFIED_BUILD:-0}"
+} >> "$RUN_DIR/provenance.txt"
 
 echo "Checking completed trace validation..."
 grep -qx 'ALL 14 GZIP INTEGRITY CHECKS PASSED' \
