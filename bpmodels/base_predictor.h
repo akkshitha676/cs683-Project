@@ -1,4 +1,7 @@
 
+// #ifndef __BASE_PREDICTOR__
+// #define __BASE_PREDICTOR__
+
 #pragma once
 
 #include "utils/common.h"
@@ -40,3 +43,5 @@ class BasePredictor {
 
 BasePredictor* CreateBP(std::string bp_name, int access_delay = 4);
 
+
+// #endif  //__BASE_PREDICTOR__
