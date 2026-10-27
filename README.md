@@ -98,7 +98,7 @@ The editable PowerPoint and PDF export are supplied separately as checkpoint sub
 
 Build and trace-download instructions for the upstream simulator are preserved in [upstream build and trace-download instructions](docs/UPSTREAM_README.md).
 
-The original large server instruction traces are not redistributed here. They are available from the upstream artifact at [Zenodo record 13133242](https://doi.org/10.5281/zenodo.13133242). The precomputed pattern CSVs in traces/ are separate files used by LLBP-X and are included in this repository.
+The original large server instruction traces are not redistributed here. They are available from the upstream artifact at [Zenodo record 13133242](https://doi.org/10.5281/zenodo.13133242). The precomputed pattern CSVs in traces/ are used only by the llbpx-optw model; none of the reported runs read them.
 
 Expected MD5 checksums are listed in [trace checksum list](results/checkpoint1/required-traces.md5). Trace downloads must pass checksum and gzip-integrity checks before evaluation.
 
