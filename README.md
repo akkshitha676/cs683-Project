@@ -80,10 +80,6 @@ The geometric mean summarizes normalized per-workload MPKI ratios. Pooled reduct
 
 The runs use the same workload windows and BTB setting. They do not establish latency, IPC, energy, or physical implementation benefits.
 
-## Changes relative to upstream
-
-The study-specific implementation, experiment runners, validation, and reporting changes are listed in [the changes guide](docs/changes_relative_to_upstream.md). The underlying LLBP-X artifact remains attributed to its original repository and paper.
-
 ## Repository layout
 
 - `bpmodels/`: predictor implementations and model registrations.
