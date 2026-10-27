@@ -116,7 +116,7 @@ uint64_t sim_instructions;
 int access_delay = 4;
 
 // Filter never taken branches from BPU update
-// This is the case for any commercial branch predictior.
+// This is the case for any commercial branch predictor.
 // They update the BPU only for branches that are in the BTB which only
 // contains taken branches.
 std::unordered_set<uint64_t> takenPCs;
